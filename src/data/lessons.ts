@@ -10,9 +10,9 @@ const lessons: Lesson[] = [
     color: 'blue',
     timelineType: 'present-center',
     formula: {
-      positive: 'Subject + V1 (+ s/es for he/she/it)',
-      negative: "Subject + do/does + not + V1",
-      question: 'Do/Does + Subject + V1?',
+      positive: 'Subject + verb (+ s/es for he/she/it)',
+      negative: "Subject + do/does + not + verb",
+      question: 'Do/Does + Subject + verb?',
     },
     examples: [
       { en: 'I go to school every day.', cn: '我每天去学校。', ja: '私は毎日学校に行きます。' },
@@ -47,9 +47,9 @@ const lessons: Lesson[] = [
     color: 'orange',
     timelineType: 'past-point',
     formula: {
-      positive: 'Subject + V2',
-      negative: 'Subject + did + not + V1',
-      question: 'Did + Subject + V1?',
+      positive: 'Subject + past form',
+      negative: 'Subject + did + not + verb',
+      question: 'Did + Subject + verb?',
     },
     examples: [
       { en: 'I visited my grandmother yesterday.', cn: '我昨天拜访了我的祖母。', ja: '私は昨日祖母を訪ねました。' },
@@ -84,9 +84,9 @@ const lessons: Lesson[] = [
     color: 'purple',
     timelineType: 'future-point',
     formula: {
-      positive: 'Subject + will + V1',
-      negative: 'Subject + will + not + V1',
-      question: 'Will + Subject + V1?',
+      positive: 'Subject + will + verb',
+      negative: 'Subject + will + not + verb',
+      question: 'Will + Subject + verb?',
     },
     examples: [
       { en: 'I will call you tomorrow.', cn: '我明天会打电话给你。', ja: '明日電話します。' },
@@ -121,9 +121,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'continuous-present',
     formula: {
-      positive: 'Subject + am/is/are + V-ing',
-      negative: 'Subject + am/is/are + not + V-ing',
-      question: 'Am/Is/Are + Subject + V-ing?',
+      positive: 'Subject + am/is/are + verb-ing',
+      negative: 'Subject + am/is/are + not + verb-ing',
+      question: 'Am/Is/Are + Subject + verb-ing?',
     },
     examples: [
       { en: 'I am studying English now.', cn: '我现在正在学英语。', ja: '私は今英語を勉強しています。' },
@@ -158,9 +158,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'continuous-past',
     formula: {
-      positive: 'Subject + was/were + V-ing',
-      negative: 'Subject + was/were + not + V-ing',
-      question: 'Was/Were + Subject + V-ing?',
+      positive: 'Subject + was/were + verb-ing',
+      negative: 'Subject + was/were + not + verb-ing',
+      question: 'Was/Were + Subject + verb-ing?',
     },
     examples: [
       { en: 'I was watching TV at 8 PM yesterday.', cn: '昨天晚上8点我正在看电视。', ja: '昨夜8時にテレビを見ていました。' },
@@ -195,9 +195,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'continuous-future',
     formula: {
-      positive: 'Subject + will + be + V-ing',
-      negative: 'Subject + will + not + be + V-ing',
-      question: 'Will + Subject + be + V-ing?',
+      positive: 'Subject + will + be + verb-ing',
+      negative: 'Subject + will + not + be + verb-ing',
+      question: 'Will + Subject + be + verb-ing?',
     },
     examples: [
       { en: 'I will be studying at 8 PM tonight.', cn: '今晚8点我将在学习。', ja: '今夜8時に勉強しているでしょう。' },
@@ -232,9 +232,9 @@ const lessons: Lesson[] = [
     color: 'red',
     timelineType: 'perfect-present',
     formula: {
-      positive: 'Subject + have/has + V3',
-      negative: 'Subject + have/has + not + V3',
-      question: 'Have/Has + Subject + V3?',
+      positive: 'Subject + have/has + past participle',
+      negative: 'Subject + have/has + not + past participle',
+      question: 'Have/Has + Subject + past participle?',
     },
     examples: [
       { en: 'I have visited Paris twice.', cn: '我去过巴黎两次。', ja: '私はパリに2回行ったことがあります。' },
@@ -269,9 +269,9 @@ const lessons: Lesson[] = [
     color: 'red',
     timelineType: 'perfect-past',
     formula: {
-      positive: 'Subject + had + V3',
-      negative: 'Subject + had + not + V3',
-      question: 'Had + Subject + V3?',
+      positive: 'Subject + had + past participle',
+      negative: 'Subject + had + not + past participle',
+      question: 'Had + Subject + past participle?',
     },
     examples: [
       { en: 'I had finished my homework before dinner.', cn: '晚饭前我已经完成了作业。', ja: '夕食前に宿題を終えていました。' },
@@ -306,9 +306,9 @@ const lessons: Lesson[] = [
     color: 'red',
     timelineType: 'perfect-future',
     formula: {
-      positive: 'Subject + will + have + V3',
-      negative: 'Subject + will + not + have + V3',
-      question: 'Will + Subject + have + V3?',
+      positive: 'Subject + will + have + past participle',
+      negative: 'Subject + will + not + have + past participle',
+      question: 'Will + Subject + have + past participle?',
     },
     examples: [
       { en: 'I will have finished this book by Friday.', cn: '到周五我将读完这本书。', ja: '金曜日までにこの本を読み終えているでしょう。' },
@@ -343,9 +343,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'perfect-continuous-present',
     formula: {
-      positive: 'Subject + have/has + been + V-ing',
-      negative: 'Subject + have/has + not + been + V-ing',
-      question: 'Have/Has + Subject + been + V-ing?',
+      positive: 'Subject + have/has + been + verb-ing',
+      negative: 'Subject + have/has + not + been + verb-ing',
+      question: 'Have/Has + Subject + been + verb-ing?',
     },
     examples: [
       { en: 'I have been studying English for 3 years.', cn: '我学英语已经3年了。', ja: '私は3年間英語を勉強しています。' },
@@ -380,9 +380,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'perfect-continuous-past',
     formula: {
-      positive: 'Subject + had + been + V-ing',
-      negative: 'Subject + had + not + been + V-ing',
-      question: 'Had + Subject + been + V-ing?',
+      positive: 'Subject + had + been + verb-ing',
+      negative: 'Subject + had + not + been + verb-ing',
+      question: 'Had + Subject + been + verb-ing?',
     },
     examples: [
       { en: 'I had been studying for 2 hours when she arrived.', cn: '她到达时我已经学习了2个小时。', ja: '彼女が到着したとき2時間勉強していました。' },
@@ -417,9 +417,9 @@ const lessons: Lesson[] = [
     color: 'green',
     timelineType: 'perfect-continuous-future',
     formula: {
-      positive: 'Subject + will + have + been + V-ing',
-      negative: 'Subject + will + not + have + been + V-ing',
-      question: 'Will + Subject + have + been + V-ing?',
+      positive: 'Subject + will + have + been + verb-ing',
+      negative: 'Subject + will + not + have + been + verb-ing',
+      question: 'Will + Subject + have + been + verb-ing?',
     },
     examples: [
       { en: 'By next year, I will have been studying English for 5 years.', cn: '到明年，我将已经学习英语5年了。', ja: '来年までに5年間英語を勉強していることになります。' },

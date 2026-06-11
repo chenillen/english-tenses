@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
@@ -9,6 +10,7 @@ import { useSpeech } from '../hooks/useSpeech'
 import Timeline from '../components/Timeline'
 import QuizCard from '../components/QuizCard'
 import { colorFull } from '../utils/colors'
+import tenseIcons from '../utils/tenseIcons'
 import type { Example, TrickyExample, Locale, Mistake } from '../types'
 
 function getExampleTranslation(ex: Example, locale: Locale): string {
@@ -77,6 +79,10 @@ export default function LessonDetail() {
   const getLessonProgress = useProgress((s) => s.getLessonProgress)
   const { speak, stop, speakingText, supported: ttsSupported } = useSpeech()
 
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [slug])
+
   if (!lesson) {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
@@ -92,6 +98,7 @@ export default function LessonDetail() {
 
   const c = colorFull[lesson.color] || colorFull.blue
   const isCompleted = getLessonProgress(lesson.slug)
+  const TenseIcon = tenseIcons[lesson.timelineType]
 
   const handleQuizComplete = (score: number) => {
     setQuizScore(lesson.slug, score)
@@ -132,8 +139,8 @@ export default function LessonDetail() {
 
       <motion.div {...fadeUp} transition={{ duration: 0.3 }}>
         <div className="mb-6 flex items-center gap-3">
-          <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${c.badge}`}>
-            <span className="text-lg font-bold text-white">{lesson.id}</span>
+          <div className={`flex h-12 w-12 items-center justify-center rounded-lg text-white ${c.badge}`}>
+            <TenseIcon />
           </div>
           <div>
             <div className="flex items-center gap-2">
