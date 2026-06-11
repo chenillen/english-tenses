@@ -1,19 +1,10 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { seedFromDate } from '../utils/seeds'
+import type { DailyTenseHeroProps, TColor } from '../types'
 
-function seedFromDate() {
-  const today = new Date()
-  const key = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-  let hash = 0
-  for (let i = 0; i < key.length; i++) {
-    hash = ((hash << 5) - hash) + key.charCodeAt(i)
-    hash |= 0
-  }
-  return Math.abs(hash)
-}
-
-const bgColorMap = {
+const bgColorMap: Record<TColor, string> = {
   blue: 'bg-blue-500',
   orange: 'bg-orange-500',
   purple: 'bg-purple-500',
@@ -21,7 +12,7 @@ const bgColorMap = {
   red: 'bg-red-500',
 }
 
-const borderColorMap = {
+const borderColorMap: Record<TColor, string> = {
   blue: 'border-blue-200 dark:border-blue-800',
   orange: 'border-orange-200 dark:border-orange-800',
   purple: 'border-purple-200 dark:border-purple-800',
@@ -29,7 +20,7 @@ const borderColorMap = {
   red: 'border-red-200 dark:border-red-800',
 }
 
-const lightColorMap = {
+const lightColorMap: Record<TColor, string> = {
   blue: 'bg-blue-50 dark:bg-blue-950',
   orange: 'bg-orange-50 dark:bg-orange-950',
   purple: 'bg-purple-50 dark:bg-purple-950',
@@ -37,7 +28,7 @@ const lightColorMap = {
   red: 'bg-red-50 dark:bg-red-950',
 }
 
-const textColorMap = {
+const textColorMap: Record<TColor, string> = {
   blue: 'text-blue-600 dark:text-blue-400',
   orange: 'text-orange-600 dark:text-orange-400',
   purple: 'text-purple-600 dark:text-purple-400',
@@ -45,7 +36,7 @@ const textColorMap = {
   red: 'text-red-600 dark:text-red-400',
 }
 
-const levelColors = [
+const levelColors: string[] = [
   '',
   'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
   'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
@@ -53,7 +44,7 @@ const levelColors = [
   'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
 ]
 
-export default function DailyTenseHero({ lessons }) {
+export default function DailyTenseHero({ lessons }: DailyTenseHeroProps) {
   const { t } = useTranslation()
 
   const dailyIndex = seedFromDate() % lessons.length

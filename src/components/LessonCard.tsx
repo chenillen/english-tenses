@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import type { LessonCardProps, TColor } from '../types'
 
-const bgColorMap = {
+const bgColorMap: Record<TColor, string> = {
   blue: 'bg-blue-500',
   orange: 'bg-orange-500',
   purple: 'bg-purple-500',
@@ -9,7 +10,7 @@ const bgColorMap = {
   red: 'bg-red-500',
 }
 
-const levelColors = [
+const levelColors: string[] = [
   '',
   'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
   'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
@@ -17,7 +18,7 @@ const levelColors = [
   'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
 ]
 
-export default function LessonCard({ lesson, completed, score, index }) {
+export default function LessonCard({ lesson, completed, score, index }: LessonCardProps) {
   const { t } = useTranslation()
 
   const name = t(`lessons.${lesson.slug}.name`)

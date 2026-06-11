@@ -6,7 +6,12 @@ import useTheme from '../hooks/useTheme'
 import useProgress from '../store/progress'
 import ProgressBar from './ProgressBar'
 
-const languages = [
+interface Language {
+  code: string
+  labelKey: string
+}
+
+const languages: Language[] = [
   { code: 'en', labelKey: 'lang.en' },
   { code: 'zh', labelKey: 'lang.zh' },
   { code: 'ja', labelKey: 'lang.ja' },
@@ -16,14 +21,14 @@ export default function Header() {
   const { t, i18n } = useTranslation()
   const { theme, toggleTheme } = useTheme()
   const getOverallProgress = useProgress((s) => s.getOverallProgress)
-  const [open, setOpen] = useState(false)
-  const ref = useRef(null)
+  const [open, setOpen] = useState<boolean>(false)
+  const ref = useRef<HTMLDivElement>(null)
 
   const currentLang = languages.find((l) => i18n.language?.startsWith(l.code)) || languages[0]
 
   useEffect(() => {
-    const handleClick = (e) => {
-      if (ref.current && !ref.current.contains(e.target)) {
+    const handleClick = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
         setOpen(false)
       }
     }
@@ -31,7 +36,7 @@ export default function Header() {
     return () => document.removeEventListener('mousedown', handleClick)
   }, [])
 
-  const changeLanguage = (code) => {
+  const changeLanguage = (code: string) => {
     i18n.changeLanguage(code)
     setOpen(false)
   }

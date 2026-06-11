@@ -2,23 +2,22 @@ import { useState, useEffect, useCallback } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { seedFromDate } from '../utils/seeds'
+import type { IntroOverlayProps, TColor, ColorStyleBasic } from '../types'
 
 const SLIDE_COUNT = 5
 
-function seedFromDate() {
-  const today = new Date()
-  const key = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`
-  let hash = 0
-  for (let i = 0; i < key.length; i++) {
-    hash = ((hash << 5) - hash) + key.charCodeAt(i)
-    hash |= 0
-  }
-  return Math.abs(hash)
+const colorStyles: Record<TColor, ColorStyleBasic> = {
+  blue: { bg: 'bg-blue-500', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400' },
+  orange: { bg: 'bg-orange-500', light: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400' },
+  purple: { bg: 'bg-purple-500', light: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400' },
+  green: { bg: 'bg-green-500', light: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400' },
+  red: { bg: 'bg-red-500', light: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400' },
 }
 
-export default function IntroOverlay({ lessons, onClose }) {
+export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
   const { t } = useTranslation()
-  const [slide, setSlide] = useState(0)
+  const [slide, setSlide] = useState<number>(0)
 
   const dailyIndex = seedFromDate() % lessons.length
   const dailyLesson = lessons[dailyIndex]
@@ -32,7 +31,7 @@ export default function IntroOverlay({ lessons, onClose }) {
   }, [])
 
   useEffect(() => {
-    const handleKey = (e) => {
+    const handleKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') nextSlide()
       if (e.key === 'ArrowLeft') prevSlide()
       if (e.key === 'Escape') onClose()
@@ -40,14 +39,6 @@ export default function IntroOverlay({ lessons, onClose }) {
     window.addEventListener('keydown', handleKey)
     return () => window.removeEventListener('keydown', handleKey)
   }, [nextSlide, prevSlide, onClose])
-
-  const colorStyles = {
-    blue: { bg: 'bg-blue-500', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400' },
-    orange: { bg: 'bg-orange-500', light: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400' },
-    purple: { bg: 'bg-purple-500', light: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400' },
-    green: { bg: 'bg-green-500', light: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400' },
-    red: { bg: 'bg-red-500', light: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400' },
-  }
 
   const c = colorStyles[dailyLesson.color] || colorStyles.blue
   const isIntroSlide = slide < SLIDE_COUNT
@@ -114,7 +105,7 @@ export default function IntroOverlay({ lessons, onClose }) {
               </button>
 
               <button
-                onClick={slide === SLIDE_COUNT - 1 ? nextSlide : nextSlide}
+                onClick={nextSlide}
                 className="rounded-2xl bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
               >
                 {slide === SLIDE_COUNT - 1 ? t('intro.start') : t('intro.next')}
