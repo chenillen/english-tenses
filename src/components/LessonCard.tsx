@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Check } from '@phosphor-icons/react'
 import { badgeColor, levelColors } from '../utils/colors'
+import tenseIcons from '../utils/tenseIcons'
 import type { LessonCardProps } from '../types'
 
 export default function LessonCard({ lesson, completed, score, index }: LessonCardProps) {
@@ -11,6 +12,7 @@ export default function LessonCard({ lesson, completed, score, index }: LessonCa
   const description = t(`lessons.${lesson.slug}.description`)
   const difficultyLabel = t(`difficulty.${lesson.difficulty}`)
   const enName = t(`lessons.${lesson.slug}.name`, { lng: 'en' })
+  const TenseIcon = tenseIcons[lesson.timelineType]
 
   return (
     <motion.div
@@ -27,8 +29,8 @@ export default function LessonCard({ lesson, completed, score, index }: LessonCa
       )}
 
       <div className="mb-3 flex items-center gap-3">
-        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${badgeColor[lesson.color]}`}>
-          <span className="text-sm font-bold text-white">{lesson.id}</span>
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg text-white ${badgeColor[lesson.color]}`}>
+          <TenseIcon />
         </div>
         <div className="min-w-0 flex flex-col gap-0.5">
           <span className="truncate text-xs font-medium uppercase tracking-wider text-text-muted dark:text-[#777777]">
