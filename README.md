@@ -1,10 +1,10 @@
-# English Tenses
+# Tense Craft
 
 An interactive, mobile-first web app for learning all 12 English tenses through visual timelines, examples, quizzes, and progress tracking.
 
 Built for ESL learners. English, Chinese, and Japanese supported.
 
-**[Live Demo](https://chenillen.github.io/english-tenses/)**
+**[Live Demo](https://chenillen.github.io/tense-craft/)**
 
 ---
 
@@ -44,7 +44,7 @@ pnpm install
 pnpm dev
 ```
 
-Open `http://localhost:5173/english-tenses/` in your browser.
+Open `http://localhost:5173/tense-craft/` in your browser.
 
 ```bash
 pnpm build        # production build to dist/
@@ -79,7 +79,7 @@ Warm monochrome palette (`#F7F6F3` canvas) with desaturated pastel accents for t
 
 Deployed to GitHub Pages via GitHub Actions on push to `master`.
 
-Vite `base` and React Router `basename` are both set to `/english-tenses/` and `/english-tenses` respectively.
+Vite `base` and React Router `basename` are both set to `/tense-craft/` and `/tense-craft` respectively.
 
 ---
 

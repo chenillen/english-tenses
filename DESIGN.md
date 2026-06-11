@@ -106,6 +106,7 @@ Each tense category has three color levels: a mid-tone for filled badges, a ligh
 | Perfect (Red) | `#C45552` | `#FDEBEC` | `#9F2F2D` |
 
 **Usage pattern:**
+
 - `bg-present` / `bg-past` etc. -- filled badges, lesson number circles, CTA buttons
 - `bg-present-bg` / `bg-past-bg` etc. -- tinted card backgrounds, tag backgrounds
 - `text-present-text` / `text-past-text` etc. -- colored text on neutral backgrounds
@@ -157,6 +158,7 @@ rounded-xl border border-border bg-surface p-5 sm:p-6
 ```
 
 Interactive cards add:
+
 ```
 hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-all duration-200
 ```
@@ -166,6 +168,7 @@ hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] transition-
 ### Card Grid Consistency
 
 Lesson cards in a grid row must have identical height. Achieved by:
+
 - `h-full` on the wrapping `<Link>` and the card's `motion.div`
 - `flex flex-col` on the card to make it a vertical flex container
 - `truncate` on the lesson name and English name to prevent overflow
@@ -286,6 +289,7 @@ Import: `import { Check, X, Globe, Sun, Moon, CaretDown, CaretLeft, ArrowRight }
 ### Color Maps
 
 Shared color utility at `src/utils/colors.ts`. Three lookup patterns:
+
 - `colorBasic`: `{ bg, light, text }` for backgrounds + text
 - `colorFull`: `{ bg, light, text, badge }` for components needing a badge fill
 - `badgeColor`: simple `bg-{color}` mapping for badge fills
@@ -320,6 +324,7 @@ Shared color utility at `src/utils/colors.ts`. Three lookup patterns:
 ### Keystroke Micro-UIs (Grammar Formulas)
 
 Grammar formulas render as:
+
 ```html
 <code className="font-mono text-sm font-semibold text-text-primary dark:text-[#EDEDED]">
   Subject + Verb
@@ -336,7 +341,7 @@ Strategy: Tailwind `dark:` variant. Toggle `.dark` class on `<html>` via `useThe
 @custom-variant dark (&:where(.dark, .dark *));
 ```
 
-Default: respects `prefers-color-scheme`. Persists to `english-tenses-theme` in localStorage.
+Default: respects `prefers-color-scheme`. Persists to `tense-craft-theme` in localStorage.
 
 Background transition: `transition: background-color 0.3s ease, color 0.3s ease` on body.
 
@@ -372,9 +377,9 @@ Background transition: `transition: background-color 0.3s ease, color 0.3s ease`
 ## Data & State
 
 - Lesson data: `src/data/lessons.ts` (12 tenses, hardcoded)
-- Progress: Zustand + persist → `english-tenses-progress` (localStorage)
-- Theme: `useTheme` hook → `english-tenses-theme` (localStorage)
-- Intro skipped: `english-tenses-intro-skipped` (localStorage)
+- Progress: Zustand + persist → `tense-craft-progress` (localStorage)
+- Theme: `useTheme` hook → `tense-craft-theme` (localStorage)
+- Intro skipped: `tense-craft-intro-skipped` (localStorage)
 - i18n: `i18next` + `react-i18next`, locales en/zh/ja
 - Tense of the Day: date-based deterministic seed (`src/utils/seeds.ts`)
 
