@@ -1,22 +1,8 @@
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
-import type { LessonCardProps, TColor } from '../types'
-
-const bgColorMap: Record<TColor, string> = {
-  blue: 'bg-blue-500',
-  orange: 'bg-orange-500',
-  purple: 'bg-purple-500',
-  green: 'bg-green-500',
-  red: 'bg-red-500',
-}
-
-const levelColors: string[] = [
-  '',
-  'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
-  'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
-  'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
-  'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
-]
+import { Check } from '@phosphor-icons/react'
+import { badgeColor, levelColors } from '../utils/colors'
+import type { LessonCardProps } from '../types'
 
 export default function LessonCard({ lesson, completed, score, index }: LessonCardProps) {
   const { t } = useTranslation()
@@ -24,60 +10,63 @@ export default function LessonCard({ lesson, completed, score, index }: LessonCa
   const name = t(`lessons.${lesson.slug}.name`)
   const description = t(`lessons.${lesson.slug}.description`)
   const difficultyLabel = t(`difficulty.${lesson.difficulty}`)
+  const enName = t(`lessons.${lesson.slug}.name`, { lng: 'en' })
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
-      whileHover={{ y: -4 }}
-      className="group relative overflow-hidden rounded-3xl border border-zinc-200 bg-white p-5 transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700 sm:p-6"
+      transition={{ duration: 0.5, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
+      whileHover={{ y: -2, boxShadow: '0 2px 12px rgba(0,0,0,0.04)' }}
+      className="group relative flex h-full flex-col overflow-hidden rounded-xl border border-border bg-surface p-5 transition-all duration-200 hover:border-border-hover dark:border-[#2A2A2A] dark:bg-[#1A1A1A] dark:hover:border-[#333333] dark:hover:shadow-[0_2px_12px_rgba(0,0,0,0.15)] sm:p-6"
     >
       {completed && (
-        <div className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600 dark:text-emerald-400"><polyline points="20 6 9 17 4 12"/></svg>
+        <div className="absolute right-4 top-4 flex h-7 w-7 items-center justify-center rounded-full bg-level-1 dark:bg-[#1A2A1A]">
+          <Check weight="bold" size={14} className="text-level-1-text dark:text-level-1-text" />
         </div>
       )}
 
       <div className="mb-3 flex items-center gap-3">
-        <div className={`flex h-10 w-10 items-center justify-center rounded-2xl ${bgColorMap[lesson.color]}`}>
+        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-lg ${badgeColor[lesson.color]}`}>
           <span className="text-sm font-bold text-white">{lesson.id}</span>
         </div>
-        <div className="flex flex-col gap-0.5">
-          <span className="text-xs font-medium text-zinc-400 uppercase tracking-wide">
+        <div className="min-w-0 flex flex-col gap-0.5">
+          <span className="truncate text-xs font-medium uppercase tracking-wider text-text-muted dark:text-[#777777]">
             {t('home.level')} {lesson.level}
           </span>
-          <span className={`inline-flex w-fit rounded-lg px-2 py-0.5 text-[10px] font-semibold ${levelColors[lesson.level]}`}>
+          <span className={`inline-flex w-fit rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${levelColors[lesson.level]}`}>
             {difficultyLabel}
           </span>
         </div>
       </div>
 
-      <h3 className="mb-1 text-lg font-semibold text-zinc-900 dark:text-white">
+      <h3 className="mb-1 truncate text-lg font-semibold text-text-primary dark:text-[#EDEDED]">
         {name}
       </h3>
-      <p className="mb-3 text-sm text-zinc-500 dark:text-zinc-400">
-        {t(`lessons.${lesson.slug}.name`, { lng: 'en' })}
+      <p className="mb-3 truncate text-sm text-text-tertiary dark:text-[#777777]">
+        {enName}
       </p>
-      <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+      <p className="flex-1 text-sm leading-relaxed text-text-secondary line-clamp-2 dark:text-[#9B9B9B]">
         {description}
       </p>
 
-      {score !== undefined && score !== null && (
-        <div className="mt-4 flex items-center gap-2">
-          <div className="flex-1">
-            <div className="h-1.5 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+      <div className="mt-4 flex items-center gap-2">
+        <div className="flex-1">
+          <div className="h-1.5 overflow-hidden rounded-full bg-progress-bg dark:bg-[#2A2A2A]">
+            {score !== undefined && score !== null ? (
               <motion.div
                 initial={{ width: 0 }}
                 animate={{ width: `${score}%` }}
                 transition={{ duration: 0.8, ease: 'easeOut' }}
-                className={`h-full rounded-full ${bgColorMap[lesson.color]}`}
+                className={`h-full rounded-full ${badgeColor[lesson.color]}`}
               />
-            </div>
+            ) : null}
           </div>
-          <span className="text-xs font-medium tabular-nums text-zinc-400">{score}%</span>
         </div>
-      )}
+        <span className="w-8 text-right text-xs font-medium tabular-nums text-text-muted dark:text-[#777777]">
+          {score !== undefined && score !== null ? `${score}%` : ''}
+        </span>
+      </div>
     </motion.div>
   )
 }

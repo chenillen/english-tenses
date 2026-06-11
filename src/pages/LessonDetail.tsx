@@ -1,21 +1,15 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { CaretLeft, Check, X } from '@phosphor-icons/react'
 import lessons from '../data/lessons'
 import useProgress from '../store/progress'
 import useLocale from '../hooks/useLocale'
 import { useSpeech } from '../hooks/useSpeech'
 import Timeline from '../components/Timeline'
 import QuizCard from '../components/QuizCard'
-import type { Example, TrickyExample, Locale, Mistake, ColorFullMap } from '../types'
-
-const colorStyles: ColorFullMap = {
-  blue: { bg: 'bg-blue-50 dark:bg-blue-950', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-500' },
-  orange: { bg: 'bg-orange-50 dark:bg-orange-950', light: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400', badge: 'bg-orange-500' },
-  purple: { bg: 'bg-purple-50 dark:bg-purple-950', light: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400', badge: 'bg-purple-500' },
-  green: { bg: 'bg-green-50 dark:bg-green-950', light: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400', badge: 'bg-green-500' },
-  red: { bg: 'bg-red-50 dark:bg-red-950', light: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400', badge: 'bg-red-500' },
-}
+import { colorFull } from '../utils/colors'
+import type { Example, TrickyExample, Locale, Mistake } from '../types'
 
 function getExampleTranslation(ex: Example, locale: Locale): string {
   if (locale === 'zh') return ex.cn
@@ -48,10 +42,10 @@ function SpeakerButton({
     <button
       type="button"
       onClick={onClick}
-      className={`ml-2 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
+      className={`ml-2 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-md transition-colors ${
         isActive
-          ? 'bg-blue-500 text-white'
-          : 'bg-zinc-200 text-zinc-500 hover:bg-blue-100 hover:text-blue-600 dark:bg-zinc-700 dark:text-zinc-400 dark:hover:bg-blue-900 dark:hover:text-blue-400'
+          ? 'bg-present text-white'
+          : 'bg-progress-bg text-text-muted hover:bg-present-bg hover:text-present-text dark:bg-[#2A2A2A] dark:text-[#777777] dark:hover:bg-[#1A3A4D] dark:hover:text-[#5BA4CF]'
       }`}
       aria-label={isActive ? 'Stop reading' : 'Read aloud'}
       title={isActive ? 'Stop reading' : 'Listen'}
@@ -87,8 +81,8 @@ export default function LessonDetail() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <p className="text-xl font-semibold text-zinc-500">{t('lesson.notFound')}</p>
-          <Link to="/" className="mt-4 inline-block text-blue-500 hover:underline">
+          <p className="text-xl font-semibold text-text-secondary dark:text-[#9B9B9B]">{t('lesson.notFound')}</p>
+          <Link to="/" className="mt-4 inline-block text-present-text hover:underline">
             {t('lesson.backToHome')}
           </Link>
         </div>
@@ -96,7 +90,7 @@ export default function LessonDetail() {
     )
   }
 
-  const c = colorStyles[lesson.color] || colorStyles.blue
+  const c = colorFull[lesson.color] || colorFull.blue
   const isCompleted = getLessonProgress(lesson.slug)
 
   const handleQuizComplete = (score: number) => {
@@ -130,29 +124,29 @@ export default function LessonDetail() {
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <Link
         to="/"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
+        className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors hover:text-text-primary dark:text-[#9B9B9B] dark:hover:text-[#EDEDED]"
       >
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        <CaretLeft weight="bold" size={16} />
         {t('lesson.backToLessons')}
       </Link>
 
       <motion.div {...fadeUp} transition={{ duration: 0.3 }}>
         <div className="mb-6 flex items-center gap-3">
-          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${c.badge}`}>
+          <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${c.badge}`}>
             <span className="text-lg font-bold text-white">{lesson.id}</span>
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-extrabold text-zinc-900 dark:text-white">
+              <h1 className="font-heading text-2xl font-extrabold tracking-tight text-text-primary dark:text-[#EDEDED]">
                 {t(`lessons.${lesson.slug}.name`)}
               </h1>
               {isCompleted && (
-                <span className={`inline-flex items-center rounded-full ${c.bg} px-2.5 py-0.5 text-xs font-semibold ${c.text}`}>
+                <span className={`inline-flex items-center rounded-full ${c.bg} px-2.5 py-0.5 text-xs font-semibold uppercase tracking-wider ${c.text}`}>
                   {t('lesson.completed')}
                 </span>
               )}
             </div>
-            <p className="text-zinc-500 dark:text-zinc-400">
+            <p className="text-sm text-text-tertiary dark:text-[#777777]">
               {t(`lessons.${lesson.slug}.name`, { lng: 'en' })}
             </p>
           </div>
@@ -162,11 +156,11 @@ export default function LessonDetail() {
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.3, delay: 0.05 }}
-        className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+        className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
       >
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.timeline')}</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.timeline')}</h2>
         <Timeline type={lesson.timelineType} color={lesson.color} />
-        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+        <p className="mt-2 text-sm text-text-secondary dark:text-[#9B9B9B]">
           {t(`lessons.${lesson.slug}.description`)}
         </p>
       </motion.div>
@@ -175,16 +169,16 @@ export default function LessonDetail() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.3, delay: 0.1 }}
-          className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+          className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
         >
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.usage')}</h2>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.usage')}</h2>
           <div className="grid gap-2 sm:grid-cols-2">
             {usageItems.map((u: string, i: number) => (
               <div
                 key={i}
-                className={`flex items-center gap-3 rounded-2xl p-3 ${c.bg}`}
+                className={`flex items-center gap-3 rounded-lg p-3 ${c.bg}`}
               >
-                <span className={`flex h-6 w-6 items-center justify-center rounded-lg text-xs font-bold ${c.text} bg-white/80 dark:bg-zinc-900/80`}>
+                <span className={`flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold ${c.text} bg-white/80 dark:bg-[#1A1A1A]/80`}>
                   {i + 1}
                 </span>
                 <span className={`text-sm font-medium ${c.text}`}>{u}</span>
@@ -197,21 +191,21 @@ export default function LessonDetail() {
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.3, delay: 0.15 }}
-        className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+        className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
       >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.grammarFormula')}</h2>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.grammarFormula')}</h2>
         <div className="space-y-3">
           {formulaItems.map((f: FormulaItem, i: number) => (
             <div
               key={i}
-              className="flex items-center gap-3 rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
+              className="flex items-center gap-3 rounded-lg bg-surface-raised p-4 dark:bg-[#242424]"
             >
-              <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-zinc-200 text-xs font-bold text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300">
+              <span className="flex h-8 w-8 items-center justify-center rounded-md bg-progress-bg text-xs font-bold text-text-secondary dark:bg-[#2A2A2A] dark:text-[#9B9B9B]">
                 {f.icon}
               </span>
               <div>
-                <span className="block text-xs font-medium text-zinc-400">{f.label}</span>
-                <code className="text-sm font-semibold text-zinc-900 dark:text-white">{f.value}</code>
+                <span className="block text-xs font-medium text-text-muted dark:text-[#777777]">{f.label}</span>
+                <code className="font-mono text-sm font-semibold text-text-primary dark:text-[#EDEDED]">{f.value}</code>
               </div>
             </div>
           ))}
@@ -221,17 +215,17 @@ export default function LessonDetail() {
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.3, delay: 0.2 }}
-        className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+        className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
       >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.examples')}</h2>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.examples')}</h2>
         <div className="space-y-3">
           {lesson.examples.map((ex: Example, i: number) => (
             <div
               key={i}
-              className="rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
+              className="rounded-lg bg-surface-raised p-4 dark:bg-[#242424]"
             >
               <div className="flex items-start justify-between gap-2">
-                <p className="text-sm font-medium text-zinc-900 dark:text-white">{ex.en}</p>
+                <p className="text-sm font-medium text-text-primary dark:text-[#EDEDED]">{ex.en}</p>
                 <SpeakerButton
                   text={ex.en}
                   speakingText={speakingText}
@@ -239,7 +233,7 @@ export default function LessonDetail() {
                   onClick={() => handlePlayExample(ex.en)}
                 />
               </div>
-              <p className="mt-1 text-xs text-zinc-400">{getExampleTranslation(ex, locale)}</p>
+              <p className="mt-1 text-xs text-text-muted dark:text-[#777777]">{getExampleTranslation(ex, locale)}</p>
             </div>
           ))}
         </div>
@@ -249,17 +243,17 @@ export default function LessonDetail() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.3, delay: 0.22 }}
-          className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+          className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
         >
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.trickyExamples')}</h2>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.trickyExamples')}</h2>
           <div className="space-y-3">
             {lesson.trickyExamples.map((ex: TrickyExample, i: number) => (
               <div
                 key={i}
-                className="rounded-2xl bg-amber-50 p-4 dark:bg-amber-950"
+                className="rounded-lg bg-level-2 p-4 dark:bg-[#2A2418]"
               >
                 <div className="flex items-start justify-between gap-2">
-                  <p className="text-sm font-medium text-amber-900 dark:text-amber-100">{ex.en}</p>
+                  <p className="text-sm font-medium text-level-2-text dark:text-level-2-text">{ex.en}</p>
                   <SpeakerButton
                     text={ex.en}
                     speakingText={speakingText}
@@ -267,8 +261,8 @@ export default function LessonDetail() {
                     onClick={() => handlePlayExample(ex.en)}
                   />
                 </div>
-                <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">{getExampleTranslation(ex, locale)}</p>
-                <p className="mt-2 rounded-lg bg-amber-100 px-3 py-1.5 text-xs leading-relaxed text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                <p className="mt-1 text-xs text-level-2-text/70 dark:text-level-2-text/70">{getExampleTranslation(ex, locale)}</p>
+                <p className="mt-2 rounded-md bg-[#956400]/10 px-3 py-1.5 text-xs leading-relaxed text-level-2-text dark:bg-[#956400]/20 dark:text-level-2-text">
                   {ex.explanation}
                 </p>
               </div>
@@ -281,19 +275,19 @@ export default function LessonDetail() {
         <motion.div
           {...fadeUp}
           transition={{ duration: 0.3, delay: 0.25 }}
-          className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+          className="mb-8 rounded-xl border border-border bg-surface p-5 dark:border-[#2A2A2A] dark:bg-[#1A1A1A] sm:p-6"
         >
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.commonMistakes')}</h2>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-text-muted dark:text-[#777777]">{t('lesson.commonMistakes')}</h2>
           <div className="space-y-3">
             {lesson.mistakes.map((m: Mistake, i: number) => (
               <div key={i} className="space-y-2">
-                <div className="flex items-center gap-2 rounded-2xl bg-red-50 p-3 dark:bg-red-950">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-red-500"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-                  <span className="text-sm line-through text-red-700 dark:text-red-300">{m.wrong}</span>
+                <div className="flex items-center gap-2 rounded-lg bg-perfect-bg p-3 dark:bg-[#3A1A1A]">
+                  <X weight="bold" size={16} className="shrink-0 text-perfect-text dark:text-perfect-text" />
+                  <span className="text-sm line-through text-perfect-text dark:text-perfect-text">{m.wrong}</span>
                 </div>
-                <div className="flex items-center gap-2 rounded-2xl bg-emerald-50 p-3 dark:bg-emerald-950">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-emerald-500"><polyline points="20 6 9 17 4 12"/></svg>
-                  <span className="text-sm font-medium text-emerald-700 dark:text-emerald-300">{m.correct}</span>
+                <div className="flex items-center gap-2 rounded-lg bg-level-1 p-3 dark:bg-[#1A2A1A]">
+                  <Check weight="bold" size={16} className="shrink-0 text-level-1-text dark:text-level-1-text" />
+                  <span className="text-sm font-medium text-level-1-text dark:text-level-1-text">{m.correct}</span>
                 </div>
               </div>
             ))}
@@ -306,7 +300,7 @@ export default function LessonDetail() {
         transition={{ duration: 0.3, delay: 0.3 }}
         className="mb-8"
       >
-        <h2 className="mb-4 text-xl font-bold text-zinc-900 dark:text-white">{t('lesson.quiz')}</h2>
+        <h2 className="mb-4 text-xl font-bold text-text-primary dark:text-[#EDEDED]">{t('lesson.quiz')}</h2>
         <QuizCard quiz={lesson.quiz} onComplete={handleQuizComplete} />
       </motion.div>
     </div>

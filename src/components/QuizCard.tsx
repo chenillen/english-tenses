@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { Check, X } from '@phosphor-icons/react'
 import type { QuizCardProps } from '../types'
 
 export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
@@ -42,14 +43,14 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="rounded-3xl border border-zinc-200 bg-white p-8 text-center dark:border-zinc-800 dark:bg-zinc-900"
+        className="rounded-xl border border-border bg-surface p-8 text-center dark:border-[#2A2A2A] dark:bg-[#1A1A1A]"
       >
-        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-emerald-100 dark:bg-emerald-900">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-emerald-600 dark:text-emerald-400"><polyline points="20 6 9 17 4 12"/></svg>
+        <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-level-1 dark:bg-[#1A2A1A]">
+          <Check weight="bold" size={32} className="text-level-1-text dark:text-level-1-text" />
         </div>
-        <h3 className="mb-2 text-xl font-bold text-zinc-900 dark:text-white">{t('quiz.complete')}</h3>
-        <p className="mb-1 text-3xl font-extrabold tabular-nums text-zinc-900 dark:text-white">{percent}%</p>
-        <p className="text-sm text-zinc-500 dark:text-zinc-400">
+        <h3 className="mb-2 text-xl font-bold text-text-primary dark:text-[#EDEDED]">{t('quiz.complete')}</h3>
+        <p className="mb-1 text-3xl font-extrabold tabular-nums text-text-primary dark:text-[#EDEDED]">{percent}%</p>
+        <p className="text-sm text-text-secondary dark:text-[#9B9B9B]">
           {correct} {t('quiz.of')} {total} {t('quiz.correct')}
         </p>
       </motion.div>
@@ -57,9 +58,9 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
   }
 
   return (
-    <div className="rounded-3xl border border-zinc-200 bg-white dark:border-zinc-800 dark:bg-zinc-900">
-      <div className="flex items-center justify-between border-b border-zinc-100 px-6 py-4 dark:border-zinc-800">
-        <span className="text-sm font-semibold text-zinc-900 dark:text-white">
+    <div className="rounded-xl border border-border bg-surface dark:border-[#2A2A2A] dark:bg-[#1A1A1A]">
+      <div className="flex items-center justify-between border-b border-border px-6 py-4 dark:border-[#2A2A2A]">
+        <span className="text-sm font-semibold text-text-primary dark:text-[#EDEDED]">
           {t('quiz.question')} {current + 1} {t('quiz.of')} {total}
         </span>
         <div className="flex gap-1">
@@ -68,10 +69,10 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
               key={i}
               className={`h-1.5 w-6 rounded-full transition-colors ${
                 i < current
-                  ? 'bg-emerald-500'
+                  ? 'bg-level-1-text'
                   : i === current
-                    ? 'bg-zinc-900 dark:bg-white'
-                    : 'bg-zinc-200 dark:bg-zinc-700'
+                    ? 'bg-text-primary dark:bg-[#EDEDED]'
+                    : 'bg-progress-bg dark:bg-[#2A2A2A]'
               }`}
             />
           ))}
@@ -79,7 +80,7 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
       </div>
 
       <div className="p-6">
-        <p className="mb-6 text-lg font-medium text-zinc-900 dark:text-white">
+        <p className="mb-6 text-lg font-medium text-text-primary dark:text-[#EDEDED]">
           {question.question}
         </p>
 
@@ -87,16 +88,16 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
           {question.options.map((option, index) => {
             const isSelected = selected === index
             const isCorrect = index === question.answer
-            let bg = 'bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-700'
-            let border = 'border-zinc-200 dark:border-zinc-700'
+            let bg = 'bg-surface-raised dark:bg-[#242424] hover:bg-surface-hover dark:hover:bg-[#333333]'
+            let border = 'border-border dark:border-[#2A2A2A]'
 
             if (answered) {
               if (isCorrect) {
-                bg = 'bg-emerald-50 dark:bg-emerald-950'
-                border = 'border-emerald-300 dark:border-emerald-700'
+                bg = 'bg-level-1 dark:bg-[#1A2A1A]'
+                border = 'border-level-1-text/30 dark:border-level-1-text/30'
               } else if (isSelected && !isCorrect) {
-                bg = 'bg-red-50 dark:bg-red-950'
-                border = 'border-red-300 dark:border-red-700'
+                bg = 'bg-perfect-bg dark:bg-[#3A1A1A]'
+                border = 'border-perfect-text/30 dark:border-perfect-text/30'
               }
             }
 
@@ -105,33 +106,33 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
                 key={index}
                 onClick={() => handleSelect(index)}
                 disabled={answered}
-                className={`flex w-full items-center gap-3 rounded-2xl border p-4 text-left transition-all ${bg} ${border} ${
+                className={`flex w-full items-center gap-3 rounded-lg border p-4 text-left transition-all ${bg} ${border} ${
                   answered ? 'cursor-default' : 'cursor-pointer active:scale-[0.98]'
                 }`}
               >
-                <span className={`flex h-8 w-8 items-center justify-center rounded-xl text-sm font-semibold ${
+                <span className={`flex h-8 w-8 items-center justify-center rounded-md text-sm font-semibold ${
                   answered && isCorrect
-                    ? 'bg-emerald-500 text-white'
+                    ? 'bg-level-1-text text-white'
                     : answered && isSelected && !isCorrect
-                      ? 'bg-red-500 text-white'
-                      : 'bg-zinc-200 text-zinc-600 dark:bg-zinc-700 dark:text-zinc-300'
+                      ? 'bg-perfect-text text-white'
+                      : 'bg-progress-bg text-text-secondary dark:bg-[#2A2A2A] dark:text-[#9B9B9B]'
                 }`}>
                   {String.fromCharCode(65 + index)}
                 </span>
                 <span className={`text-sm font-medium ${
                   answered && isCorrect
-                    ? 'text-emerald-700 dark:text-emerald-300'
+                    ? 'text-level-1-text dark:text-level-1-text'
                     : answered && isSelected && !isCorrect
-                      ? 'text-red-700 dark:text-red-300'
-                      : 'text-zinc-700 dark:text-zinc-300'
+                      ? 'text-perfect-text dark:text-perfect-text'
+                      : 'text-text-primary dark:text-[#EDEDED]'
                 }`}>
                   {option}
                 </span>
                 {answered && isCorrect && (
-                  <svg className="ml-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <Check weight="bold" size={20} className="ml-auto text-level-1-text dark:text-level-1-text" />
                 )}
                 {answered && isSelected && !isCorrect && (
-                  <svg className="ml-auto" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  <X weight="bold" size={20} className="ml-auto text-perfect-text dark:text-perfect-text" />
                 )}
               </button>
             )
@@ -145,7 +146,7 @@ export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
           >
             <button
               onClick={handleNext}
-              className="mt-4 w-full rounded-2xl bg-zinc-900 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+              className="mt-4 w-full rounded-md bg-text-primary py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#333333] active:scale-[0.98] dark:bg-[#EDEDED] dark:text-text-primary dark:hover:bg-[#CCCCCC]"
             >
               {current + 1 < total ? t('quiz.nextQuestion') : t('quiz.finishQuiz')}
             </button>

@@ -3,17 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import { seedFromDate } from '../utils/seeds'
-import type { IntroOverlayProps, TColor, ColorStyleBasic } from '../types'
+import { badgeColor, colorBasic } from '../utils/colors'
+import type { IntroOverlayProps, TColor } from '../types'
 
 const SLIDE_COUNT = 5
-
-const colorStyles: Record<TColor, ColorStyleBasic> = {
-  blue: { bg: 'bg-blue-500', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400' },
-  orange: { bg: 'bg-orange-500', light: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400' },
-  purple: { bg: 'bg-purple-500', light: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400' },
-  green: { bg: 'bg-green-500', light: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400' },
-  red: { bg: 'bg-red-500', light: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400' },
-}
 
 export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
   const { t } = useTranslation()
@@ -40,7 +33,8 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
     return () => window.removeEventListener('keydown', handleKey)
   }, [nextSlide, prevSlide, onClose])
 
-  const c = colorStyles[dailyLesson.color] || colorStyles.blue
+  const c = colorBasic[dailyLesson.color] || colorBasic.blue
+  const bg = badgeColor[dailyLesson.color] || badgeColor.blue
   const isIntroSlide = slide < SLIDE_COUNT
 
   return (
@@ -49,13 +43,13 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-[100] flex items-center justify-center bg-white dark:bg-zinc-950"
+        className="fixed inset-0 z-[100] flex items-center justify-center bg-canvas dark:bg-[#0D0D0D]"
       >
         {isIntroSlide ? (
           <div className="mx-auto flex w-full max-w-lg flex-col items-center px-6 py-8">
             <button
               onClick={onClose}
-              className="mb-8 self-end text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+              className="mb-8 self-end text-sm font-medium text-text-muted transition-colors hover:text-text-secondary dark:text-[#777777] dark:hover:text-[#9B9B9B]"
             >
               {t('intro.skip')}
             </button>
@@ -66,20 +60,20 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
                   key={i}
                   className={`h-1 w-8 rounded-full transition-all duration-300 ${
                     i === slide
-                      ? 'bg-zinc-900 dark:bg-white'
+                      ? 'bg-text-primary dark:bg-[#EDEDED]'
                       : i < slide
-                        ? 'bg-zinc-300 dark:bg-zinc-600'
-                        : 'bg-zinc-200 dark:bg-zinc-700'
+                        ? 'bg-text-tertiary dark:bg-[#555555]'
+                        : 'bg-progress-bg dark:bg-[#2A2A2A]'
                   }`}
                 />
               ))}
             </div>
 
             <div className="mb-6 text-center">
-              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-zinc-400">
+              <p className="mb-1 text-xs font-medium uppercase tracking-wider text-text-muted dark:text-[#777777]">
                 {t('intro.subtitle')}
               </p>
-              <h1 className="text-2xl font-extrabold text-zinc-900 dark:text-white">
+              <h1 className="font-heading text-2xl font-extrabold tracking-tight text-text-primary dark:text-[#EDEDED]">
                 {t(`intro.slides.${slide + 1}.title`)}
               </h1>
             </div>
@@ -90,7 +84,7 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
               animate={{ opacity: 1, y: 0 }}
               className="mb-12 text-center"
             >
-              <p className="text-lg leading-relaxed text-zinc-600 dark:text-zinc-300">
+              <p className="text-lg leading-relaxed text-text-secondary dark:text-[#9B9B9B]">
                 {t(`intro.slides.${slide + 1}.body`)}
               </p>
             </motion.div>
@@ -99,14 +93,14 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
               <button
                 onClick={prevSlide}
                 disabled={slide === 0}
-                className="rounded-2xl px-4 py-2.5 text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-600 disabled:opacity-0 dark:hover:text-zinc-300"
+                className="rounded-lg px-4 py-2.5 text-sm font-medium text-text-muted transition-colors hover:text-text-secondary disabled:opacity-0 dark:text-[#777777] dark:hover:text-[#9B9B9B]"
               >
                 {t('intro.prev')}
               </button>
 
               <button
                 onClick={nextSlide}
-                className="rounded-2xl bg-zinc-900 px-6 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+                className="rounded-md bg-text-primary px-6 py-2.5 text-sm font-semibold text-white transition-all hover:bg-[#333333] active:scale-[0.98] dark:bg-[#EDEDED] dark:text-text-primary dark:hover:bg-[#CCCCCC]"
               >
                 {slide === SLIDE_COUNT - 1 ? t('intro.start') : t('intro.next')}
               </button>
@@ -114,7 +108,7 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
           </div>
         ) : (
           <div className="mx-auto flex w-full max-w-lg flex-col items-center px-6 py-8">
-            <span className="mb-6 text-xs font-medium uppercase tracking-wider text-zinc-400">
+            <span className="mb-6 text-xs font-medium uppercase tracking-wider text-text-muted dark:text-[#777777]">
               {t('hero.todayTense')}
             </span>
 
@@ -125,15 +119,15 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
             >
               <Link
                 to={`/lesson/${dailyLesson.slug}`}
-                className="block rounded-3xl border border-zinc-200 bg-white p-8 text-center transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+                className="block rounded-xl border border-border bg-surface p-8 text-center transition-all duration-200 hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:border-[#2A2A2A] dark:bg-[#1A1A1A] dark:hover:border-[#333333] dark:hover:shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
               >
-                <div className={`mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-2xl ${c.bg}`}>
+                <div className={`mx-auto mb-5 flex h-16 w-16 items-center justify-center rounded-lg ${bg}`}>
                   <span className="text-2xl font-bold text-white">{dailyLesson.id}</span>
                 </div>
-                <h2 className="mb-2 text-2xl font-extrabold text-zinc-900 dark:text-white">
+                <h2 className="mb-2 font-heading text-2xl font-extrabold tracking-tight text-text-primary dark:text-[#EDEDED]">
                   {t(`lessons.${dailyLesson.slug}.name`)}
                 </h2>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                <p className="text-sm text-text-secondary dark:text-[#9B9B9B]">
                   {t(`lessons.${dailyLesson.slug}.description`)}
                 </p>
               </Link>
@@ -142,13 +136,13 @@ export default function IntroOverlay({ lessons, onClose }: IntroOverlayProps) {
             <div className="flex w-full flex-col gap-3">
               <button
                 onClick={onClose}
-                className="w-full rounded-2xl bg-zinc-900 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200"
+                className="w-full rounded-md bg-text-primary py-3.5 text-sm font-semibold text-white transition-all hover:bg-[#333333] active:scale-[0.98] dark:bg-[#EDEDED] dark:text-text-primary dark:hover:bg-[#CCCCCC]"
               >
                 {t('hero.startLearning')}
               </button>
               <button
                 onClick={onClose}
-                className="text-sm font-medium text-zinc-400 transition-colors hover:text-zinc-600 dark:hover:text-zinc-300"
+                className="text-sm font-medium text-text-muted transition-colors hover:text-text-secondary dark:text-[#777777] dark:hover:text-[#9B9B9B]"
               >
                 {t('intro.skip')}
               </button>

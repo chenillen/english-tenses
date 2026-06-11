@@ -24,7 +24,7 @@ function AppContent() {
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-canvas dark:bg-[#0D0D0D]">
       {showIntro && (
         <IntroOverlay lessons={lessons} onClose={closeIntro} />
       )}

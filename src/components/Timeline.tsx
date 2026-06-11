@@ -1,13 +1,6 @@
 import { motion } from 'framer-motion'
-import type { TColor, TimelineType, ColorMap } from '../types'
-
-const colorMap: ColorMap = {
-  blue: { bg: 'bg-blue-500', light: 'bg-blue-100 dark:bg-blue-900', text: 'text-blue-600 dark:text-blue-400' },
-  orange: { bg: 'bg-orange-500', light: 'bg-orange-100 dark:bg-orange-900', text: 'text-orange-600 dark:text-orange-400' },
-  purple: { bg: 'bg-purple-500', light: 'bg-purple-100 dark:bg-purple-900', text: 'text-purple-600 dark:text-purple-400' },
-  green: { bg: 'bg-green-500', light: 'bg-green-100 dark:bg-green-900', text: 'text-green-600 dark:text-green-400' },
-  red: { bg: 'bg-red-500', light: 'bg-red-100 dark:bg-red-900', text: 'text-red-600 dark:text-red-400' },
-}
+import { badgeColor, colorBasic } from '../utils/colors'
+import type { TColor, TimelineType } from '../types'
 
 type PointType = 'past' | 'present' | 'future'
 
@@ -18,17 +11,18 @@ interface SimpleTimelineProps {
 }
 
 function SimpleTimeline({ color, point, label }: SimpleTimelineProps) {
-  const c = colorMap[color] || colorMap.blue
+  const c = colorBasic[color] || colorBasic.blue
+  const dotBg = badgeColor[color] || badgeColor.blue
 
   return (
     <div className="flex items-center gap-3 py-4">
       <span className={`text-xs font-medium ${c.text}`}>{label[0]}</span>
-      <div className="relative flex h-1 flex-1 rounded-full bg-zinc-200 dark:bg-zinc-700">
+      <div className="relative flex h-1 flex-1 rounded-full bg-progress-bg dark:bg-[#2A2A2A]">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className={`absolute inset-y-0 rounded-full ${c.bg}`}
+          className={`absolute inset-y-0 rounded-full ${dotBg}`}
           style={{
             left: point === 'past' ? '0%' : point === 'future' ? '66%' : '33%',
             width: '33%',
@@ -39,7 +33,7 @@ function SimpleTimeline({ color, point, label }: SimpleTimelineProps) {
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.4 }}
-          className={`absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white dark:border-zinc-900 ${c.bg}`}
+          className={`absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white dark:border-[#1A1A1A] ${dotBg}`}
           style={{
             left: point === 'past' ? '16%' : point === 'future' ? '83%' : '50%',
           }}
@@ -56,12 +50,13 @@ interface ContinuousTimelineProps {
 }
 
 function ContinuousTimeline({ color, position }: ContinuousTimelineProps) {
-  const c = colorMap[color] || colorMap.green
+  const c = colorBasic[color] || colorBasic.green
+  const dotBg = badgeColor[color] || badgeColor.green
 
-  const positionMap: Record<string, { left: string; width: string; label: string }> = {
-    'continuous-present': { left: '33%', width: '33%', label: 'Present' },
-    'continuous-past': { left: '0%', width: '33%', label: 'Past' },
-    'continuous-future': { left: '66%', width: '33%', label: 'Future' },
+  const positionMap: Record<string, { left: string; width: string }> = {
+    'continuous-present': { left: '33%', width: '33%' },
+    'continuous-past': { left: '0%', width: '33%' },
+    'continuous-future': { left: '66%', width: '33%' },
   }
 
   const pos = positionMap[position] || positionMap['continuous-present']
@@ -69,27 +64,20 @@ function ContinuousTimeline({ color, position }: ContinuousTimelineProps) {
   return (
     <div className="flex items-center gap-3 py-4">
       <span className={`text-xs font-medium ${c.text}`}>Past</span>
-      <div className="relative flex h-1 flex-1 rounded-full bg-zinc-200 dark:bg-zinc-700">
+      <div className="relative flex h-1 flex-1 rounded-full bg-progress-bg dark:bg-[#2A2A2A]">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className={`h-full rounded-full ${c.bg}`}
-          style={{
-            position: 'absolute',
-            left: pos.left,
-            width: pos.width,
-          }}
+          className={`h-full rounded-full ${dotBg}`}
+          style={{ position: 'absolute', left: pos.left, width: pos.width }}
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-          className={`absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full ${c.bg}`}
-          style={{
-            left: `calc(${pos.left} + ${pos.width})`,
-            marginLeft: '-4px',
-          }}
+          className={`absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full ${dotBg}`}
+          style={{ left: `calc(${pos.left} + ${pos.width})`, marginLeft: '-4px' }}
         />
       </div>
       <span className={`text-xs font-medium ${c.text}`}>Future</span>
@@ -103,7 +91,8 @@ interface PerfectTimelineProps {
 }
 
 function PerfectTimeline({ color, position }: PerfectTimelineProps) {
-  const c = colorMap[color] || colorMap.red
+  const c = colorBasic[color] || colorBasic.red
+  const dotBg = badgeColor[color] || badgeColor.red
 
   const positionMap: Record<string, { start: string; end: string }> = {
     'perfect-present': { start: '0%', end: '50%' },
@@ -116,23 +105,19 @@ function PerfectTimeline({ color, position }: PerfectTimelineProps) {
   return (
     <div className="flex items-center gap-3 py-4">
       <span className={`text-xs font-medium ${c.text}`}>Past</span>
-      <div className="relative flex h-1 flex-1 rounded-full bg-zinc-200 dark:bg-zinc-700">
+      <div className="relative flex h-1 flex-1 rounded-full bg-progress-bg dark:bg-[#2A2A2A]">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className={`absolute inset-y-0 rounded-full ${c.bg}`}
-          style={{
-            left: pos.start,
-            width: pos.end,
-            transformOrigin: 'left',
-          }}
+          className={`absolute inset-y-0 rounded-full ${dotBg}`}
+          style={{ left: pos.start, width: pos.end, transformOrigin: 'left' }}
         />
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ delay: 0.6 }}
-          className={`absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white dark:border-zinc-900 ${c.bg}`}
+          className={`absolute top-1/2 h-3 w-3 -translate-y-1/2 rounded-full border-2 border-white dark:border-[#1A1A1A] ${dotBg}`}
           style={{ left: pos.end, marginLeft: '-6px' }}
         />
       </div>
@@ -147,7 +132,8 @@ interface PerfectContinuousTimelineProps {
 }
 
 function PerfectContinuousTimeline({ color, position }: PerfectContinuousTimelineProps) {
-  const c = colorMap[color] || colorMap.green
+  const c = colorBasic[color] || colorBasic.green
+  const dotBg = badgeColor[color] || badgeColor.green
 
   const positionMap: Record<string, { start: string; width: string }> = {
     'perfect-continuous-present': { start: '0%', width: '50%' },
@@ -160,27 +146,20 @@ function PerfectContinuousTimeline({ color, position }: PerfectContinuousTimelin
   return (
     <div className="flex items-center gap-3 py-4">
       <span className={`text-xs font-medium ${c.text}`}>Past</span>
-      <div className="relative flex h-1 flex-1 rounded-full bg-zinc-200 dark:bg-zinc-700">
+      <div className="relative flex h-1 flex-1 rounded-full bg-progress-bg dark:bg-[#2A2A2A]">
         <motion.div
           initial={{ scaleX: 0 }}
           animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: 'easeOut' }}
-          className={`h-full rounded-full ${c.bg}`}
-          style={{
-            position: 'absolute',
-            left: pos.start,
-            width: pos.width,
-          }}
+          className={`h-full rounded-full ${dotBg}`}
+          style={{ position: 'absolute', left: pos.start, width: pos.width }}
         />
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: [0, 1, 1, 0] }}
           transition={{ duration: 1.5, repeat: Infinity, repeatDelay: 1 }}
-          className={`absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full ${c.bg}`}
-          style={{
-            left: pos.width,
-            marginLeft: '-4px',
-          }}
+          className={`absolute top-1/2 h-2 w-2 -translate-y-1/2 rounded-full ${dotBg}`}
+          style={{ left: pos.width, marginLeft: '-4px' }}
         />
       </div>
       <span className={`text-xs font-medium ${c.text}`}>Future</span>
@@ -190,17 +169,12 @@ function PerfectContinuousTimeline({ color, position }: PerfectContinuousTimelin
 
 export default function Timeline({ type, color }: { type: TimelineType; color: TColor }) {
   if (type === 'present-center' || type === 'past-point' || type === 'future-point') {
-    const labelMap: Record<string, [string, string]> = {
-      'present-center': ['Past', 'Future'],
-      'past-point': ['Past', 'Future'],
-      'future-point': ['Past', 'Future'],
-    }
     const pointMap: Record<string, PointType> = {
       'present-center': 'present',
       'past-point': 'past',
       'future-point': 'future',
     }
-    return <SimpleTimeline color={color} point={pointMap[type]} label={labelMap[type]} />
+    return <SimpleTimeline color={color} point={pointMap[type]} label={['Past', 'Future']} />
   }
 
   if (type.startsWith('continuous-')) {
