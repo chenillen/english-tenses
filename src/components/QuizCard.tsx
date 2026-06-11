@@ -1,19 +1,20 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import type { QuizCardProps } from '../types'
 
-export default function QuizCard({ quiz, onComplete }) {
+export default function QuizCard({ quiz, onComplete }: QuizCardProps) {
   const { t } = useTranslation()
-  const [current, setCurrent] = useState(0)
-  const [selected, setSelected] = useState(null)
-  const [answered, setAnswered] = useState(false)
-  const [correct, setCorrect] = useState(0)
-  const [finished, setFinished] = useState(false)
+  const [current, setCurrent] = useState<number>(0)
+  const [selected, setSelected] = useState<number | null>(null)
+  const [answered, setAnswered] = useState<boolean>(false)
+  const [correct, setCorrect] = useState<number>(0)
+  const [finished, setFinished] = useState<boolean>(false)
 
   const question = quiz[current]
   const total = quiz.length
 
-  const handleSelect = (index) => {
+  const handleSelect = (index: number) => {
     if (answered) return
     setSelected(index)
     setAnswered(true)

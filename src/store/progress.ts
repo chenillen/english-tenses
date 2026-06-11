@@ -1,25 +1,26 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import type { ProgressState } from '../types'
 
-const useProgress = create(
+const useProgress = create<ProgressState>()(
   persist(
     (set, get) => ({
       completedLessons: [],
       quizScores: {},
 
-      completeLesson: (slug) =>
+      completeLesson: (slug: string) =>
         set((state) => ({
           completedLessons: state.completedLessons.includes(slug)
             ? state.completedLessons
             : [...state.completedLessons, slug],
         })),
 
-      setQuizScore: (slug, score) =>
+      setQuizScore: (slug: string, score: number) =>
         set((state) => ({
           quizScores: { ...state.quizScores, [slug]: score },
         })),
 
-      getLessonProgress: (slug) => {
+      getLessonProgress: (slug: string) => {
         const state = get()
         return state.completedLessons.includes(slug)
       },

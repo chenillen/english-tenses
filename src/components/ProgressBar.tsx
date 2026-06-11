@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import type { ProgressBarProps } from '../types'
 
-export default function ProgressBar({ current, total, className = '' }) {
+export default function ProgressBar({ current, total, className = '' }: ProgressBarProps) {
   const percent = Math.round((current / total) * 100)
 
   return (

@@ -8,7 +8,7 @@ import LessonDetail from './pages/LessonDetail'
 import lessons from './data/lessons'
 
 function AppContent() {
-  const [showIntro, setShowIntro] = useState(false)
+  const [showIntro, setShowIntro] = useState<boolean>(false)
   const location = useLocation()
 
   useEffect(() => {

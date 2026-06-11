@@ -1,10 +1,17 @@
 import { useState, useEffect, useCallback } from 'react'
 
-export default function useTheme() {
-  const [theme, setTheme] = useState(() => {
+type Theme = 'light' | 'dark'
+
+interface UseThemeReturn {
+  theme: Theme
+  toggleTheme: () => void
+}
+
+export default function useTheme(): UseThemeReturn {
+  const [theme, setTheme] = useState<Theme>(() => {
     if (typeof window === 'undefined') return 'light'
     const stored = localStorage.getItem('english-tenses-theme')
-    if (stored) return stored
+    if (stored === 'dark' || stored === 'light') return stored
     return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
   })
 

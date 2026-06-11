@@ -1,4 +1,6 @@
-const lessons = [
+import type { Lesson } from '../types'
+
+const lessons: Lesson[] = [
   {
     id: 1,
     slug: 'simple-present',
