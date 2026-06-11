@@ -1,37 +1,659 @@
-export default [
+const lessons = [
   {
     id: 1,
-
     slug: 'simple-present',
-
     name: 'Simple Present',
-
     chineseName: '一般现在时',
-
+    level: 1,
     category: 'present',
-
     difficulty: 1,
-
     color: 'blue',
-
-    usage: ['Habits', 'Facts', 'Routines'],
-
+    description: 'Used for habits, general truths, and repeated actions.',
+    timelineType: 'present-center',
+    usage: [
+      'Habits and routines',
+      'General truths and facts',
+      'Scheduled events',
+      'Permanent situations',
+    ],
     formula: {
-      positive: 'Subject + Verb',
-      negative: 'Subject + do/does not + Verb',
-      question: 'Do/Does + Subject + Verb?',
+      positive: 'Subject + V1 (+ s/es for he/she/it)',
+      negative: "Subject + do/does + not + V1",
+      question: 'Do/Does + Subject + V1?',
     },
-
     examples: [
+      { en: 'I go to school every day.', cn: '我每天去学校。' },
+      { en: 'She works at a bank.', cn: '她在银行工作。' },
+      { en: 'The sun rises in the east.', cn: '太阳从东方升起。' },
+      { en: 'They play football on weekends.', cn: '他们周末踢足球。' },
+    ],
+    mistakes: [
+      { wrong: 'He go to school.', correct: 'He goes to school.' },
+      { wrong: 'She don\'t like coffee.', correct: 'She doesn\'t like coffee.' },
+    ],
+    quiz: [
       {
-        en: 'I go to school every day.',
-        cn: '我每天去学校。',
+        question: 'He ____ football every day.',
+        options: ['play', 'plays', 'playing', 'played'],
+        answer: 1,
+      },
+      {
+        question: 'They ____ to the gym on Mondays.',
+        options: ['go', 'goes', 'going', 'gone'],
+        answer: 0,
+      },
+      {
+        question: 'She ____ not like vegetables.',
+        options: ['do', 'does', 'is', 'are'],
+        answer: 1,
+      },
+      {
+        question: 'Water ____ at 100 degrees Celsius.',
+        options: ['boil', 'boils', 'boiling', 'boiled'],
+        answer: 1,
       },
     ],
   },
   {
     id: 2,
+    slug: 'simple-past',
     name: 'Simple Past',
-    description: 'Completed actions in the past',
+    chineseName: '一般过去时',
+    level: 1,
+    category: 'past',
+    difficulty: 1,
+    color: 'orange',
+    description: 'Used for completed actions that happened at a specific time in the past.',
+    timelineType: 'past-point',
+    usage: [
+      'Completed actions in the past',
+      'Series of completed actions',
+      'Duration in the past',
+      'Past habits',
+    ],
+    formula: {
+      positive: 'Subject + V2',
+      negative: 'Subject + did + not + V1',
+      question: 'Did + Subject + V1?',
+    },
+    examples: [
+      { en: 'I visited my grandmother yesterday.', cn: '我昨天拜访了我的祖母。' },
+      { en: 'She watched a movie last night.', cn: '她昨晚看了一部电影。' },
+      { en: 'They lived in London for two years.', cn: '他们在伦敦住了两年。' },
+      { en: 'He didn\'t come to the party.', cn: '他没有来参加聚会。' },
+    ],
+    mistakes: [
+      { wrong: 'I go to the store yesterday.', correct: 'I went to the store yesterday.' },
+      { wrong: 'She didn\'t went home.', correct: 'She didn\'t go home.' },
+    ],
+    quiz: [
+      {
+        question: 'She ____ to Paris last summer.',
+        options: ['go', 'goes', 'went', 'going'],
+        answer: 2,
+      },
+      {
+        question: 'They ____ not finish their homework.',
+        options: ['do', 'does', 'did', 'was'],
+        answer: 2,
+      },
+      {
+        question: 'I ____ breakfast at 7 AM this morning.',
+        options: ['eat', 'eats', 'ate', 'eaten'],
+        answer: 2,
+      },
+      {
+        question: 'He ____ very happy yesterday.',
+        options: ['is', 'was', 'were', 'are'],
+        answer: 1,
+      },
+    ],
   },
-];
+  {
+    id: 3,
+    slug: 'simple-future',
+    name: 'Simple Future',
+    chineseName: '一般将来时',
+    level: 1,
+    category: 'future',
+    difficulty: 1,
+    color: 'purple',
+    description: 'Used for actions that will happen in the future.',
+    timelineType: 'future-point',
+    usage: [
+      'Predictions about the future',
+      'Spontaneous decisions',
+      'Promises',
+      'Future facts',
+    ],
+    formula: {
+      positive: 'Subject + will + V1',
+      negative: 'Subject + will + not + V1',
+      question: 'Will + Subject + V1?',
+    },
+    examples: [
+      { en: 'I will call you tomorrow.', cn: '我明天会打电话给你。' },
+      { en: 'She will arrive at 5 PM.', cn: '她将在下午5点到达。' },
+      { en: 'They won\'t come to the meeting.', cn: '他们不会来参加会议。' },
+      { en: 'Will you help me?', cn: '你会帮我吗？' },
+    ],
+    mistakes: [
+      { wrong: 'He will goes to school.', correct: 'He will go to school.' },
+      { wrong: 'I will not to eat that.', correct: 'I will not eat that.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ visit you next week.',
+        options: ['will', 'am', 'was', 'have'],
+        answer: 0,
+      },
+      {
+        question: 'She ____ not be late tomorrow.',
+        options: ['will', 'is', 'has', 'does'],
+        answer: 0,
+      },
+      {
+        question: '____ they arrive on time?',
+        options: ['Do', 'Will', 'Are', 'Have'],
+        answer: 1,
+      },
+      {
+        question: 'We ____ go to the beach if it is sunny.',
+        options: ['are', 'will', 'were', 'have'],
+        answer: 1,
+      },
+    ],
+  },
+  {
+    id: 4,
+    slug: 'present-continuous',
+    name: 'Present Continuous',
+    chineseName: '现在进行时',
+    level: 2,
+    category: 'present',
+    difficulty: 2,
+    color: 'green',
+    description: 'Used for actions happening right now or around the present time.',
+    timelineType: 'continuous-present',
+    usage: [
+      'Actions happening now',
+      'Temporary situations',
+      'Changing situations',
+      'Future arrangements',
+    ],
+    formula: {
+      positive: 'Subject + am/is/are + V-ing',
+      negative: 'Subject + am/is/are + not + V-ing',
+      question: 'Am/Is/Are + Subject + V-ing?',
+    },
+    examples: [
+      { en: 'I am studying English now.', cn: '我现在正在学英语。' },
+      { en: 'She is cooking dinner.', cn: '她正在做晚饭。' },
+      { en: 'They are playing in the park.', cn: '他们正在公园里玩。' },
+      { en: 'He is working on a new project.', cn: '他正在做一个新项目。' },
+    ],
+    mistakes: [
+      { wrong: 'I am go to school now.', correct: 'I am going to school now.' },
+      { wrong: 'She is work right now.', correct: 'She is working right now.' },
+    ],
+    quiz: [
+      {
+        question: 'She ____ reading a book right now.',
+        options: ['is', 'are', 'am', 'be'],
+        answer: 0,
+      },
+      {
+        question: 'They ____ playing football at the moment.',
+        options: ['is', 'are', 'am', 'be'],
+        answer: 1,
+      },
+      {
+        question: 'I ____ not watching TV now.',
+        options: ['is', 'are', 'am', 'be'],
+        answer: 2,
+      },
+      {
+        question: 'He ____ to music now.',
+        options: ['listen', 'listens', 'is listening', 'listening'],
+        answer: 2,
+      },
+    ],
+  },
+  {
+    id: 5,
+    slug: 'past-continuous',
+    name: 'Past Continuous',
+    chineseName: '过去进行时',
+    level: 2,
+    category: 'past',
+    difficulty: 2,
+    color: 'green',
+    description: 'Used for actions that were in progress at a specific time in the past.',
+    timelineType: 'continuous-past',
+    usage: [
+      'Actions in progress at a past time',
+      'Interrupted past actions',
+      'Parallel past actions',
+      'Setting the scene',
+    ],
+    formula: {
+      positive: 'Subject + was/were + V-ing',
+      negative: 'Subject + was/were + not + V-ing',
+      question: 'Was/Were + Subject + V-ing?',
+    },
+    examples: [
+      { en: 'I was watching TV at 8 PM yesterday.', cn: '昨天晚上8点我正在看电视。' },
+      { en: 'She was sleeping when I called.', cn: '我打电话时她正在睡觉。' },
+      { en: 'They were playing while it was raining.', cn: '下雨时他们正在玩。' },
+      { en: 'We were having dinner when he arrived.', cn: '他到达时我们正在吃晚饭。' },
+    ],
+    mistakes: [
+      { wrong: 'I was watch TV.', correct: 'I was watching TV.' },
+      { wrong: 'They was playing outside.', correct: 'They were playing outside.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ reading when the phone rang.',
+        options: ['was', 'were', 'am', 'is'],
+        answer: 0,
+      },
+      {
+        question: 'They ____ playing outside at 3 PM.',
+        options: ['was', 'were', 'is', 'are'],
+        answer: 1,
+      },
+      {
+        question: 'She ____ not sleeping at midnight.',
+        options: ['was', 'were', 'is', 'are'],
+        answer: 0,
+      },
+      {
+        question: 'While I ____ walking, I saw a cat.',
+        options: ['am', 'is', 'was', 'were'],
+        answer: 2,
+      },
+    ],
+  },
+  {
+    id: 6,
+    slug: 'future-continuous',
+    name: 'Future Continuous',
+    chineseName: '将来进行时',
+    level: 2,
+    category: 'future',
+    difficulty: 2,
+    color: 'green',
+    description: 'Used for actions that will be in progress at a specific time in the future.',
+    timelineType: 'continuous-future',
+    usage: [
+      'Actions in progress at a future time',
+      'Future events that are planned',
+      'Polite inquiries about future plans',
+    ],
+    formula: {
+      positive: 'Subject + will + be + V-ing',
+      negative: 'Subject + will + not + be + V-ing',
+      question: 'Will + Subject + be + V-ing?',
+    },
+    examples: [
+      { en: 'I will be studying at 8 PM tonight.', cn: '今晚8点我将在学习。' },
+      { en: 'She will be working all day tomorrow.', cn: '她明天将整天工作。' },
+      { en: 'They will be traveling to Japan next month.', cn: '他们下个月将去日本旅行。' },
+      { en: 'This time next week, I will be relaxing on the beach.', cn: '下周这个时候，我将在海滩上放松。' },
+    ],
+    mistakes: [
+      { wrong: 'I will be study tonight.', correct: 'I will be studying tonight.' },
+      { wrong: 'She will working tomorrow.', correct: 'She will be working tomorrow.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ studying at 9 PM tomorrow.',
+        options: ['will be', 'am', 'was', 'have'],
+        answer: 0,
+      },
+      {
+        question: 'She ____ not be sleeping at that time.',
+        options: ['will', 'is', 'was', 'has'],
+        answer: 0,
+      },
+      {
+        question: 'This time next month, they ____ traveling.',
+        options: ['will be', 'are', 'were', 'have'],
+        answer: 0,
+      },
+      {
+        question: 'We ____ waiting for you when you arrive.',
+        options: ['will be', 'are', 'were', 'have been'],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 7,
+    slug: 'present-perfect',
+    name: 'Present Perfect',
+    chineseName: '现在完成时',
+    level: 3,
+    category: 'present',
+    difficulty: 3,
+    color: 'red',
+    description: 'Used for past actions that have a connection to the present.',
+    timelineType: 'perfect-present',
+    usage: [
+      'Life experiences',
+      'Recent past actions',
+      'Unfinished time periods',
+      'Actions with present results',
+    ],
+    formula: {
+      positive: 'Subject + have/has + V3',
+      negative: 'Subject + have/has + not + V3',
+      question: 'Have/Has + Subject + V3?',
+    },
+    examples: [
+      { en: 'I have visited Paris twice.', cn: '我去过巴黎两次。' },
+      { en: 'She has finished her homework.', cn: '她完成了她的作业。' },
+      { en: 'They have lived here since 2010.', cn: '他们从2010年起就住在这里。' },
+      { en: 'He has just arrived.', cn: '他刚到。' },
+    ],
+    mistakes: [
+      { wrong: 'I have went to Japan.', correct: 'I have gone to Japan.' },
+      { wrong: 'She has go to the store.', correct: 'She has gone to the store.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ never been to Japan.',
+        options: ['has', 'have', 'am', 'was'],
+        answer: 1,
+      },
+      {
+        question: 'She ____ already eaten lunch.',
+        options: ['has', 'have', 'is', 'was'],
+        answer: 0,
+      },
+      {
+        question: 'They ____ not finished their work yet.',
+        options: ['has', 'have', 'is', 'are'],
+        answer: 1,
+      },
+      {
+        question: 'We ____ known each other for 10 years.',
+        options: ['has', 'have', 'is', 'are'],
+        answer: 1,
+      },
+    ],
+  },
+  {
+    id: 8,
+    slug: 'past-perfect',
+    name: 'Past Perfect',
+    chineseName: '过去完成时',
+    level: 3,
+    category: 'past',
+    difficulty: 3,
+    color: 'red',
+    description: 'Used for actions that were completed before another action in the past.',
+    timelineType: 'perfect-past',
+    usage: [
+      'Action before another past action',
+      'Completed action before a past time',
+      'Reported speech',
+      'Third conditional',
+    ],
+    formula: {
+      positive: 'Subject + had + V3',
+      negative: 'Subject + had + not + V3',
+      question: 'Had + Subject + V3?',
+    },
+    examples: [
+      { en: 'I had finished my homework before dinner.', cn: '晚饭前我已经完成了作业。' },
+      { en: 'She had already left when I arrived.', cn: '我到达时她已经离开了。' },
+      { en: 'They had never seen snow before.', cn: '他们之前从未见过雪。' },
+      { en: 'By the time we got there, the movie had started.', cn: '我们到达时，电影已经开始了。' },
+    ],
+    mistakes: [
+      { wrong: 'I already ate before you came.', correct: 'I had already eaten before you came.' },
+      { wrong: 'She has left when I arrived.', correct: 'She had left when I arrived.' },
+    ],
+    quiz: [
+      {
+        question: 'By the time I arrived, she ____ already left.',
+        options: ['has', 'have', 'had', 'was'],
+        answer: 2,
+      },
+      {
+        question: 'They ____ never seen a lion before that day.',
+        options: ['has', 'have', 'had', 'were'],
+        answer: 2,
+      },
+      {
+        question: 'I ____ not finished my work when she called.',
+        options: ['has', 'have', 'had', 'was'],
+        answer: 2,
+      },
+      {
+        question: 'The train ____ already departed when we reached the station.',
+        options: ['has', 'have', 'had', 'was'],
+        answer: 2,
+      },
+    ],
+  },
+  {
+    id: 9,
+    slug: 'future-perfect',
+    name: 'Future Perfect',
+    chineseName: '将来完成时',
+    level: 3,
+    category: 'future',
+    difficulty: 3,
+    color: 'red',
+    description: 'Used for actions that will be completed before a specific time in the future.',
+    timelineType: 'perfect-future',
+    usage: [
+      'Action completed before a future time',
+      'Action completed before another future action',
+      'Projections about completion',
+    ],
+    formula: {
+      positive: 'Subject + will + have + V3',
+      negative: 'Subject + will + not + have + V3',
+      question: 'Will + Subject + have + V3?',
+    },
+    examples: [
+      { en: 'I will have finished this book by Friday.', cn: '到周五我将读完这本书。' },
+      { en: 'She will have graduated by next year.', cn: '到明年她将毕业。' },
+      { en: 'They will have arrived by 6 PM.', cn: '他们将在下午6点前到达。' },
+      { en: 'By 2030, we will have found a solution.', cn: '到2030年，我们将找到解决方案。' },
+    ],
+    mistakes: [
+      { wrong: 'I will finished by tomorrow.', correct: 'I will have finished by tomorrow.' },
+      { wrong: 'She will has left by then.', correct: 'She will have left by then.' },
+    ],
+    quiz: [
+      {
+        question: 'By next year, I ____ graduated from university.',
+        options: ['will', 'will have', 'have', 'had'],
+        answer: 1,
+      },
+      {
+        question: 'She ____ not have finished by Monday.',
+        options: ['will', 'is', 'has', 'was'],
+        answer: 0,
+      },
+      {
+        question: 'By 5 PM, they ____ completed the project.',
+        options: ['will have', 'have', 'had', 'are'],
+        answer: 0,
+      },
+      {
+        question: '____ he have arrived by the time we leave?',
+        options: ['Will', 'Is', 'Has', 'Does'],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 10,
+    slug: 'present-perfect-continuous',
+    name: 'Present Perfect Continuous',
+    chineseName: '现在完成进行时',
+    level: 4,
+    category: 'present',
+    difficulty: 4,
+    color: 'green',
+    description: 'Used for actions that started in the past and continue to the present.',
+    timelineType: 'perfect-continuous-present',
+    usage: [
+      'Actions continuing from past to present',
+      'Recently finished actions with evidence',
+      'Explaining current situations',
+    ],
+    formula: {
+      positive: 'Subject + have/has + been + V-ing',
+      negative: 'Subject + have/has + not + been + V-ing',
+      question: 'Have/Has + Subject + been + V-ing?',
+    },
+    examples: [
+      { en: 'I have been studying English for 3 years.', cn: '我学英语已经3年了。' },
+      { en: 'She has been waiting for an hour.', cn: '她已经等了一个小时。' },
+      { en: 'They have been working here since 2019.', cn: '他们从2019年起就在这里工作。' },
+      { en: 'It has been raining all day.', cn: '下了一整天的雨。' },
+    ],
+    mistakes: [
+      { wrong: 'I have study for 3 hours.', correct: 'I have been studying for 3 hours.' },
+      { wrong: 'She has waited since morning.', correct: 'She has been waiting since morning.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ studying English for 5 years.',
+        options: ['have been', 'has been', 'am', 'was'],
+        answer: 0,
+      },
+      {
+        question: 'She ____ waiting for you since 2 PM.',
+        options: ['have been', 'has been', 'is', 'was'],
+        answer: 1,
+      },
+      {
+        question: 'They ____ not been feeling well lately.',
+        options: ['have', 'has', 'are', 'were'],
+        answer: 0,
+      },
+      {
+        question: 'How long ____ you been living here?',
+        options: ['have', 'has', 'are', 'do'],
+        answer: 0,
+      },
+    ],
+  },
+  {
+    id: 11,
+    slug: 'past-perfect-continuous',
+    name: 'Past Perfect Continuous',
+    chineseName: '过去完成进行时',
+    level: 4,
+    category: 'past',
+    difficulty: 4,
+    color: 'green',
+    description: 'Used for actions that were in progress before another action in the past.',
+    timelineType: 'perfect-continuous-past',
+    usage: [
+      'Duration before something in the past',
+      'Cause of something in the past',
+      'Actions continuing up to a past point',
+    ],
+    formula: {
+      positive: 'Subject + had + been + V-ing',
+      negative: 'Subject + had + not + been + V-ing',
+      question: 'Had + Subject + been + V-ing?',
+    },
+    examples: [
+      { en: 'I had been studying for 2 hours when she arrived.', cn: '她到达时我已经学习了2个小时。' },
+      { en: 'She had been working there for 5 years before she quit.', cn: '她辞职前已经在那里工作了5年。' },
+      { en: 'They were tired because they had been running.', cn: '他们很累，因为他们一直在跑步。' },
+      { en: 'He had been waiting for an hour before the bus came.', cn: '公交车来之前他已经等了一个小时。' },
+    ],
+    mistakes: [
+      { wrong: 'I had study for 2 hours.', correct: 'I had been studying for 2 hours.' },
+      { wrong: 'She had work there for years.', correct: 'She had been working there for years.' },
+    ],
+    quiz: [
+      {
+        question: 'I ____ studying for 3 hours before the exam.',
+        options: ['have been', 'had been', 'was', 'am'],
+        answer: 1,
+      },
+      {
+        question: 'She ____ been waiting long before the bus arrived.',
+        options: ['has', 'have', 'had', 'was'],
+        answer: 2,
+      },
+      {
+        question: 'They were tired because they ____ been working all day.',
+        options: ['has', 'have', 'had', 'were'],
+        answer: 2,
+      },
+      {
+        question: '____ he been living there long before he moved?',
+        options: ['Has', 'Have', 'Had', 'Was'],
+        answer: 2,
+      },
+    ],
+  },
+  {
+    id: 12,
+    slug: 'future-perfect-continuous',
+    name: 'Future Perfect Continuous',
+    chineseName: '将来完成进行时',
+    level: 4,
+    category: 'future',
+    difficulty: 4,
+    color: 'green',
+    description: 'Used for actions that will have been in progress for a duration before a future time.',
+    timelineType: 'perfect-continuous-future',
+    usage: [
+      'Duration before a future time',
+      'Cause of a future result',
+      'Projecting ongoing actions',
+    ],
+    formula: {
+      positive: 'Subject + will + have + been + V-ing',
+      negative: 'Subject + will + not + have + been + V-ing',
+      question: 'Will + Subject + have + been + V-ing?',
+    },
+    examples: [
+      { en: 'By next year, I will have been studying English for 5 years.', cn: '到明年，我将已经学习英语5年了。' },
+      { en: 'She will have been working here for 10 years in May.', cn: '到5月，她将在这里工作满10年。' },
+      { en: 'By midnight, we will have been traveling for 12 hours.', cn: '到午夜，我们将已经旅行12个小时了。' },
+      { en: 'He will have been living in London for a year by June.', cn: '到6月，他将在伦敦住满一年。' },
+    ],
+    mistakes: [
+      { wrong: 'I will have study for 5 years.', correct: 'I will have been studying for 5 years.' },
+      { wrong: 'She will been working here.', correct: 'She will have been working here.' },
+    ],
+    quiz: [
+      {
+        question: 'By next year, I ____ studying English for 10 years.',
+        options: ['will have been', 'have been', 'had been', 'am'],
+        answer: 0,
+      },
+      {
+        question: 'She ____ not have been working here long by then.',
+        options: ['will', 'is', 'has', 'was'],
+        answer: 0,
+      },
+      {
+        question: 'By midnight, they ____ been traveling for 8 hours.',
+        options: ['will have', 'have', 'had', 'are'],
+        answer: 0,
+      },
+      {
+        question: 'By December, we ____ been living here for 3 years.',
+        options: ['will have', 'have', 'had', 'are'],
+        answer: 0,
+      },
+    ],
+  },
+]
+
+export default lessons
