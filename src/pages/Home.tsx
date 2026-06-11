@@ -6,6 +6,7 @@ import useProgress from '../store/progress'
 import LessonCard from '../components/LessonCard'
 import ProgressBar from '../components/ProgressBar'
 import DailyTenseHero from '../components/DailyTenseHero'
+import type { Lesson } from '../types'
 
 const levels = [1, 2, 3, 4]
 
@@ -61,7 +62,7 @@ export default function Home() {
       </div>
 
       {levels.map((level, lvlIndex) => {
-        const levelLessons = lessons.filter((l) => l.level === level)
+        const levelLessons = lessons.filter((l: Lesson) => l.level === level)
         if (levelLessons.length === 0) return null
 
         return (
@@ -79,7 +80,7 @@ export default function Home() {
             </motion.div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {levelLessons.map((lesson, index) => (
+              {levelLessons.map((lesson: Lesson, index: number) => (
                 <Link
                   key={lesson.id}
                   to={`/lesson/${lesson.slug}`}
