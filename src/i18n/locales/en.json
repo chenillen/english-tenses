@@ -1,8 +1,8 @@
 {
   "translation": {
     "app": {
-      "title": "Learn Genuine English Tenses",
-      "subtitle": "Master all 12 English tenses"
+      "title": "Tense Craft",
+      "subtitle": "Master all 12 English tenses through visual timelines and quizzes"
     },
     "home": {
       "lessonsCompleted": "lessons completed",
@@ -19,6 +19,40 @@
         "4": "Expert"
       },
       "level": "Level"
+    },
+    "hero": {
+      "todayTense": "Tense of the Day",
+      "startLearning": "Start Learning"
+    },
+    "intro": {
+      "heading": "Understanding English Tenses",
+      "skip": "Skip intro",
+      "subtitle": "A quick overview before you begin",
+      "slides": {
+        "1": {
+          "title": "What are tenses?",
+          "body": "Tenses tell us when an action happens — past, present, or future. They are the backbone of English grammar. Every sentence you speak or write uses a tense."
+        },
+        "2": {
+          "title": "How many tenses are there?",
+          "body": "English has 12 main tenses, organized across 3 time periods (Past, Present, Future) and 4 aspects (Simple, Continuous, Perfect, Perfect Continuous). That's 3 × 4 = 12 combinations."
+        },
+        "3": {
+          "title": "Most commonly used tenses",
+          "body": "Simple Present, Simple Past, and Present Perfect are the most frequently used in everyday English. Master these first and you'll cover roughly 70% of all conversations."
+        },
+        "4": {
+          "title": "The tricky ones",
+          "body": "Present Perfect, Past Perfect, and Perfect Continuous tenses are known to be the hardest for learners. They describe connections between different points in time — but once you visualize them, they become much clearer."
+        },
+        "5": {
+          "title": "Pro tip",
+          "body": "Don't memorize rules. Visualize the timeline. Each tense is just a different way to position an action on the line of time. Once you see it, you'll never forget it."
+        }
+      },
+      "prev": "Previous",
+      "next": "Next",
+      "start": "Let's Go"
     },
     "difficulty": {
       "1": "Beginner",
@@ -48,6 +82,11 @@
       "correct": "correct",
       "nextQuestion": "Next Question",
       "finishQuiz": "Finish Quiz"
+    },
+    "lang": {
+      "en": "English",
+      "zh": "中文",
+      "ja": "日本語"
     },
     "lessons": {
       "simple-present": {

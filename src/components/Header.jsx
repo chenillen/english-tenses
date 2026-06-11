@@ -1,22 +1,39 @@
 import { Link } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
+import { useState, useRef, useEffect } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
 import useTheme from '../hooks/useTheme'
 import useProgress from '../store/progress'
 import ProgressBar from './ProgressBar'
 
 const languages = [
-  { code: 'en', label: 'EN', flag: '🇺🇸' },
-  { code: 'zh', label: '中文', flag: '🇨🇳' },
-  { code: 'ja', label: '日本語', flag: '🇯🇵' },
+  { code: 'en', labelKey: 'lang.en' },
+  { code: 'zh', labelKey: 'lang.zh' },
+  { code: 'ja', labelKey: 'lang.ja' },
 ]
 
 export default function Header() {
   const { t, i18n } = useTranslation()
   const { theme, toggleTheme } = useTheme()
   const getOverallProgress = useProgress((s) => s.getOverallProgress)
+  const [open, setOpen] = useState(false)
+  const ref = useRef(null)
+
+  const currentLang = languages.find((l) => i18n.language?.startsWith(l.code)) || languages[0]
+
+  useEffect(() => {
+    const handleClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('mousedown', handleClick)
+    return () => document.removeEventListener('mousedown', handleClick)
+  }, [])
 
   const changeLanguage = (code) => {
     i18n.changeLanguage(code)
+    setOpen(false)
   }
 
   return (
@@ -35,22 +52,58 @@ export default function Header() {
             className="hidden sm:flex"
           />
 
-          <div className="flex items-center rounded-xl bg-zinc-100 p-0.5 dark:bg-zinc-800">
-            {languages.map((lang) => (
-              <button
-                key={lang.code}
-                onClick={() => changeLanguage(lang.code)}
-                className={`rounded-lg px-2 py-1 text-xs font-medium transition-all sm:px-2.5 sm:text-sm ${
-                  i18n.language?.startsWith(lang.code)
-                    ? 'bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-white'
-                    : 'text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200'
-                }`}
-                aria-label={`Switch language to ${lang.label}`}
+          <div className="relative" ref={ref}>
+            <button
+              onClick={() => setOpen(!open)}
+              className="flex items-center gap-1.5 rounded-xl bg-zinc-100 px-3 py-2 text-xs font-medium text-zinc-700 transition-colors hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-700 sm:text-sm"
+              aria-label="Select language"
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              <span>{t(currentLang.labelKey)}</span>
+              <svg
+                width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                className={`transition-transform ${open ? 'rotate-180' : ''}`}
               >
-                <span className="hidden sm:inline">{lang.label}</span>
-                <span className="sm:hidden">{lang.code.toUpperCase()}</span>
-              </button>
-            ))}
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+
+            <AnimatePresence>
+              {open && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4, scale: 0.96 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -4, scale: 0.96 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute right-0 top-full mt-1.5 w-44 overflow-hidden rounded-2xl border border-zinc-200 bg-white py-1 shadow-lg dark:border-zinc-700 dark:bg-zinc-800"
+                >
+                  {languages.map((lang) => (
+                    <button
+                      key={lang.code}
+                      onClick={() => changeLanguage(lang.code)}
+                      className={`flex w-full items-center gap-2.5 px-4 py-2.5 text-sm transition-colors ${
+                        i18n.language?.startsWith(lang.code)
+                          ? 'bg-zinc-50 font-semibold text-zinc-900 dark:bg-zinc-700 dark:text-white'
+                          : 'text-zinc-600 hover:bg-zinc-50 dark:text-zinc-400 dark:hover:bg-zinc-700'
+                      }`}
+                    >
+                      <span className="flex h-5 w-5 items-center justify-center text-sm">
+                        {lang.code === 'en' ? '🇺🇸' : lang.code === 'zh' ? '🇨🇳' : '🇯🇵'}
+                      </span>
+                      <span>{t(lang.labelKey)}</span>
+                      {i18n.language?.startsWith(lang.code) && (
+                        <svg className="ml-auto" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                      )}
+                    </button>
+                  ))}
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
 
           <button
