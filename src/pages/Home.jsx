@@ -5,6 +5,7 @@ import lessons from '../data/lessons'
 import useProgress from '../store/progress'
 import LessonCard from '../components/LessonCard'
 import ProgressBar from '../components/ProgressBar'
+import DailyTenseHero from '../components/DailyTenseHero'
 
 const levels = [1, 2, 3, 4]
 
@@ -16,6 +17,8 @@ export default function Home() {
 
   return (
     <div className="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-12">
+      <DailyTenseHero lessons={lessons} />
+
       <div className="mb-8 sm:mb-12">
         <motion.h1
           initial={{ opacity: 0, y: -4 }}
