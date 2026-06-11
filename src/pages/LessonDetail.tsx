@@ -9,11 +9,11 @@ import QuizCard from '../components/QuizCard'
 import type { Example, Locale, Mistake, ColorFullMap } from '../types'
 
 const colorStyles: ColorFullMap = {
-  blue: { bg: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-500' },
-  orange: { bg: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400', badge: 'bg-orange-500' },
-  purple: { bg: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400', badge: 'bg-purple-500' },
-  green: { bg: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400', badge: 'bg-green-500' },
-  red: { bg: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400', badge: 'bg-red-500' },
+  blue: { bg: 'bg-blue-50 dark:bg-blue-950', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-500' },
+  orange: { bg: 'bg-orange-50 dark:bg-orange-950', light: 'bg-orange-50 dark:bg-orange-950', text: 'text-orange-600 dark:text-orange-400', badge: 'bg-orange-500' },
+  purple: { bg: 'bg-purple-50 dark:bg-purple-950', light: 'bg-purple-50 dark:bg-purple-950', text: 'text-purple-600 dark:text-purple-400', badge: 'bg-purple-500' },
+  green: { bg: 'bg-green-50 dark:bg-green-950', light: 'bg-green-50 dark:bg-green-950', text: 'text-green-600 dark:text-green-400', badge: 'bg-green-500' },
+  red: { bg: 'bg-red-50 dark:bg-red-950', light: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400', badge: 'bg-red-500' },
 }
 
 function getExampleTranslation(ex: Example, locale: Locale): string {
