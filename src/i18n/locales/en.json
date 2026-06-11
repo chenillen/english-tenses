@@ -1,0 +1,170 @@
+{
+  "translation": {
+    "app": {
+      "title": "Learn Genuine English Tenses",
+      "subtitle": "Master all 12 English tenses"
+    },
+    "home": {
+      "lessonsCompleted": "lessons completed",
+      "levelLabels": {
+        "1": "Simple Tenses",
+        "2": "Continuous Tenses",
+        "3": "Perfect Tenses",
+        "4": "Perfect Continuous"
+      },
+      "levelDescs": {
+        "1": "Foundation",
+        "2": "In Progress",
+        "3": "Advanced",
+        "4": "Expert"
+      },
+      "level": "Level"
+    },
+    "difficulty": {
+      "1": "Beginner",
+      "2": "Intermediate",
+      "3": "Advanced",
+      "4": "Expert"
+    },
+    "lesson": {
+      "backToLessons": "Back to lessons",
+      "timeline": "Timeline",
+      "usage": "Usage",
+      "grammarFormula": "Grammar Formula",
+      "examples": "Examples",
+      "commonMistakes": "Common Mistakes",
+      "quiz": "Quiz",
+      "positive": "Positive",
+      "negative": "Negative",
+      "question": "Question",
+      "completed": "Completed",
+      "notFound": "Lesson not found",
+      "backToHome": "Back to Home"
+    },
+    "quiz": {
+      "question": "Question",
+      "of": "of",
+      "complete": "Quiz Complete!",
+      "correct": "correct",
+      "nextQuestion": "Next Question",
+      "finishQuiz": "Finish Quiz"
+    },
+    "lessons": {
+      "simple-present": {
+        "name": "Simple Present",
+        "description": "Used for habits, general truths, and repeated actions.",
+        "usage": [
+          "Habits and routines",
+          "General truths and facts",
+          "Scheduled events",
+          "Permanent situations"
+        ]
+      },
+      "simple-past": {
+        "name": "Simple Past",
+        "description": "Used for completed actions that happened at a specific time in the past.",
+        "usage": [
+          "Completed actions in the past",
+          "Series of completed actions",
+          "Duration in the past",
+          "Past habits"
+        ]
+      },
+      "simple-future": {
+        "name": "Simple Future",
+        "description": "Used for actions that will happen in the future.",
+        "usage": [
+          "Predictions about the future",
+          "Spontaneous decisions",
+          "Promises",
+          "Future facts"
+        ]
+      },
+      "present-continuous": {
+        "name": "Present Continuous",
+        "description": "Used for actions happening right now or around the present time.",
+        "usage": [
+          "Actions happening now",
+          "Temporary situations",
+          "Changing situations",
+          "Future arrangements"
+        ]
+      },
+      "past-continuous": {
+        "name": "Past Continuous",
+        "description": "Used for actions that were in progress at a specific time in the past.",
+        "usage": [
+          "Actions in progress at a past time",
+          "Interrupted past actions",
+          "Parallel past actions",
+          "Setting the scene"
+        ]
+      },
+      "future-continuous": {
+        "name": "Future Continuous",
+        "description": "Used for actions that will be in progress at a specific time in the future.",
+        "usage": [
+          "Actions in progress at a future time",
+          "Future events that are planned",
+          "Polite inquiries about future plans"
+        ]
+      },
+      "present-perfect": {
+        "name": "Present Perfect",
+        "description": "Used for past actions that have a connection to the present.",
+        "usage": [
+          "Life experiences",
+          "Recent past actions",
+          "Unfinished time periods",
+          "Actions with present results"
+        ]
+      },
+      "past-perfect": {
+        "name": "Past Perfect",
+        "description": "Used for actions that were completed before another action in the past.",
+        "usage": [
+          "Action before another past action",
+          "Completed action before a past time",
+          "Reported speech",
+          "Third conditional"
+        ]
+      },
+      "future-perfect": {
+        "name": "Future Perfect",
+        "description": "Used for actions that will be completed before a specific time in the future.",
+        "usage": [
+          "Action completed before a future time",
+          "Action completed before another future action",
+          "Projections about completion"
+        ]
+      },
+      "present-perfect-continuous": {
+        "name": "Present Perfect Continuous",
+        "description": "Used for actions that started in the past and continue to the present.",
+        "usage": [
+          "Actions continuing from past to present",
+          "Recently finished actions with evidence",
+          "Explaining current situations"
+        ]
+      },
+      "past-perfect-continuous": {
+        "name": "Past Perfect Continuous",
+        "description": "Used for actions that were in progress before another action in the past.",
+        "usage": [
+          "Duration before something in the past",
+          "Cause of something in the past",
+          "Actions continuing up to a past point"
+        ]
+      },
+      "future-perfect-continuous": {
+        "name": "Future Perfect Continuous",
+        "description": "Used for actions that will have been in progress for a duration before a future time.",
+        "usage": [
+          "Duration before a future time",
+          "Cause of a future result",
+          "Projecting ongoing actions"
+        ]
+      }
+    }
+  }
+}

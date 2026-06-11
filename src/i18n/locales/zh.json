@@ -1,0 +1,170 @@
+{
+  "translation": {
+    "app": {
+      "title": "学习地道的英语时态",
+      "subtitle": "掌握全部12种英语时态"
+    },
+    "home": {
+      "lessonsCompleted": "已完成课程",
+      "levelLabels": {
+        "1": "一般时态",
+        "2": "进行时态",
+        "3": "完成时态",
+        "4": "完成进行时态"
+      },
+      "levelDescs": {
+        "1": "基础",
+        "2": "进阶",
+        "3": "高级",
+        "4": "专家"
+      },
+      "level": "级别"
+    },
+    "difficulty": {
+      "1": "初级",
+      "2": "中级",
+      "3": "高级",
+      "4": "专家"
+    },
+    "lesson": {
+      "backToLessons": "返回课程列表",
+      "timeline": "时间线",
+      "usage": "用法",
+      "grammarFormula": "语法公式",
+      "examples": "例句",
+      "commonMistakes": "常见错误",
+      "quiz": "测验",
+      "positive": "肯定句",
+      "negative": "否定句",
+      "question": "疑问句",
+      "completed": "已完成",
+      "notFound": "找不到课程",
+      "backToHome": "返回首页"
+    },
+    "quiz": {
+      "question": "问题",
+      "of": "/",
+      "complete": "测验完成！",
+      "correct": "正确",
+      "nextQuestion": "下一题",
+      "finishQuiz": "完成测验"
+    },
+    "lessons": {
+      "simple-present": {
+        "name": "一般现在时",
+        "description": "用于表示习惯、普遍真理和重复动作。",
+        "usage": [
+          "习惯和日常活动",
+          "普遍真理和事实",
+          "预定的事件",
+          "永久的情况"
+        ]
+      },
+      "simple-past": {
+        "name": "一般过去时",
+        "description": "用于表示在过去特定时间发生的已完成动作。",
+        "usage": [
+          "过去完成的动作",
+          "一系列完成的动作",
+          "过去的持续时间",
+          "过去的习惯"
+        ]
+      },
+      "simple-future": {
+        "name": "一般将来时",
+        "description": "用于表示将来会发生的动作。",
+        "usage": [
+          "对未来的预测",
+          "自发的决定",
+          "承诺",
+          "未来的事实"
+        ]
+      },
+      "present-continuous": {
+        "name": "现在进行时",
+        "description": "用于表示正在发生或围绕现在时间进行的动作。",
+        "usage": [
+          "正在发生的动作",
+          "暂时的情况",
+          "变化中的情况",
+          "未来的安排"
+        ]
+      },
+      "past-continuous": {
+        "name": "过去进行时",
+        "description": "用于表示过去特定时间正在进行的动作。",
+        "usage": [
+          "过去某时间正在进行的动作",
+          "被中断的过去动作",
+          "同时进行的过去动作",
+          "场景描述"
+        ]
+      },
+      "future-continuous": {
+        "name": "将来进行时",
+        "description": "用于表示将来特定时间正在进行的动作。",
+        "usage": [
+          "将来某时间正在进行的动作",
+          "计划中的未来事件",
+          "礼貌询问未来计划"
+        ]
+      },
+      "present-perfect": {
+        "name": "现在完成时",
+        "description": "用于表示与现在有联系的过去动作。",
+        "usage": [
+          "人生经历",
+          "最近的过去动作",
+          "未完成的时间段",
+          "有现在结果的动作"
+        ]
+      },
+      "past-perfect": {
+        "name": "过去完成时",
+        "description": "用于表示在过去另一个动作之前已经完成的动作。",
+        "usage": [
+          "在另一个过去动作之前的动作",
+          "在过去时间之前完成的动作",
+          "间接引语",
+          "第三条件句"
+        ]
+      },
+      "future-perfect": {
+        "name": "将来完成时",
+        "description": "用于表示将来特定时间之前会完成的动作。",
+        "usage": [
+          "在将来时间之前完成的动作",
+          "在另一个将来动作之前完成的动作",
+          "关于完成的预测"
+        ]
+      },
+      "present-perfect-continuous": {
+        "name": "现在完成进行时",
+        "description": "用于表示从过去开始一直持续到现在的动作。",
+        "usage": [
+          "从过去持续到现在的动作",
+          "最近结束并有证据的动作",
+          "解释当前情况"
+        ]
+      },
+      "past-perfect-continuous": {
+        "name": "过去完成进行时",
+        "description": "用于表示在过去另一个动作之前一直进行的动作。",
+        "usage": [
+          "在过去某点之前的持续时间",
+          "过去某事的原因",
+          "持续到过去某点的动作"
+        ]
+      },
+      "future-perfect-continuous": {
+        "name": "将来完成进行时",
+        "description": "用于表示到将来某个时间点之前一直在进行的动作。",
+        "usage": [
+          "将来时间之前的持续时间",
+          "将来结果的原因",
+          "预测持续进行的动作"
+        ]
+      }
+    }
+  }
+}
