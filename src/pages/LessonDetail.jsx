@@ -1,7 +1,9 @@
 import { useParams, Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import lessons from '../data/lessons'
 import useProgress from '../store/progress'
+import useLocale from '../hooks/useLocale'
 import Timeline from '../components/Timeline'
 import QuizCard from '../components/QuizCard'
 
@@ -13,13 +15,15 @@ const colorStyles = {
   red: { bg: 'bg-red-50 dark:bg-red-950', text: 'text-red-600 dark:text-red-400', badge: 'bg-red-500' },
 }
 
-const categoryLabels = {
-  present: 'Present',
-  past: 'Past',
-  future: 'Future',
+function getExampleTranslation(ex, locale) {
+  if (locale === 'zh') return ex.cn
+  if (locale === 'ja') return ex.ja
+  return ex.cn
 }
 
 export default function LessonDetail() {
+  const { t } = useTranslation()
+  const locale = useLocale()
   const { slug } = useParams()
   const lesson = lessons.find((l) => l.slug === slug)
   const completeLesson = useProgress((s) => s.completeLesson)
@@ -30,9 +34,9 @@ export default function LessonDetail() {
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
         <div className="text-center">
-          <p className="text-xl font-semibold text-zinc-500">Lesson not found</p>
+          <p className="text-xl font-semibold text-zinc-500">{t('lesson.notFound')}</p>
           <Link to="/" className="mt-4 inline-block text-blue-500 hover:underline">
-            Back to Home
+            {t('lesson.backToHome')}
           </Link>
         </div>
       </div>
@@ -53,6 +57,8 @@ export default function LessonDetail() {
     animate: { opacity: 1, y: 0 },
   }
 
+  const usageItems = t(`lessons.${lesson.slug}.usage`, { returnObjects: true })
+
   return (
     <div className="mx-auto max-w-3xl px-4 py-8 sm:px-6 sm:py-12">
       <Link
@@ -60,7 +66,7 @@ export default function LessonDetail() {
         className="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-zinc-500 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-white"
       >
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        Back to lessons
+        {t('lesson.backToLessons')}
       </Link>
 
       <motion.div {...fadeUp} transition={{ duration: 0.3 }}>
@@ -71,15 +77,17 @@ export default function LessonDetail() {
           <div>
             <div className="flex items-center gap-2">
               <h1 className="text-2xl font-extrabold text-zinc-900 dark:text-white">
-                {lesson.name}
+                {t(`lessons.${lesson.slug}.name`)}
               </h1>
               {isCompleted && (
                 <span className={`inline-flex items-center rounded-full ${c.bg} px-2.5 py-0.5 text-xs font-semibold ${c.text}`}>
-                  Completed
+                  {t('lesson.completed')}
                 </span>
               )}
             </div>
-            <p className="text-zinc-500 dark:text-zinc-400">{lesson.chineseName}</p>
+            <p className="text-zinc-500 dark:text-zinc-400">
+              {t(`lessons.${lesson.slug}.name`, { lng: 'en' })}
+            </p>
           </div>
         </div>
       </motion.div>
@@ -89,43 +97,47 @@ export default function LessonDetail() {
         transition={{ duration: 0.3, delay: 0.05 }}
         className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
       >
-        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-400">Timeline</h2>
+        <h2 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.timeline')}</h2>
         <Timeline type={lesson.timelineType} color={lesson.color} />
-        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">{lesson.description}</p>
+        <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">
+          {t(`lessons.${lesson.slug}.description`)}
+        </p>
       </motion.div>
 
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.3, delay: 0.1 }}
-        className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
-      >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">Usage</h2>
-        <div className="grid gap-2 sm:grid-cols-2">
-          {lesson.usage.map((u, i) => (
-            <div
-              key={i}
-              className={`flex items-center gap-3 rounded-2xl p-3 ${c.bg}`}
-            >
-              <span className={`flex h-6 w-6 items-center justify-center rounded-lg text-xs font-bold ${c.text} bg-white/80 dark:bg-zinc-900/80`}>
-                {i + 1}
-              </span>
-              <span className={`text-sm font-medium ${c.text}`}>{u}</span>
-            </div>
-          ))}
-        </div>
-      </motion.div>
+      {usageItems && Array.isArray(usageItems) && usageItems.length > 0 && (
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.3, delay: 0.1 }}
+          className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+        >
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.usage')}</h2>
+          <div className="grid gap-2 sm:grid-cols-2">
+            {usageItems.map((u, i) => (
+              <div
+                key={i}
+                className={`flex items-center gap-3 rounded-2xl p-3 ${c.bg}`}
+              >
+                <span className={`flex h-6 w-6 items-center justify-center rounded-lg text-xs font-bold ${c.text} bg-white/80 dark:bg-zinc-900/80`}>
+                  {i + 1}
+                </span>
+                <span className={`text-sm font-medium ${c.text}`}>{u}</span>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       <motion.div
         {...fadeUp}
         transition={{ duration: 0.3, delay: 0.15 }}
         className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
       >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">Grammar Formula</h2>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.grammarFormula')}</h2>
         <div className="space-y-3">
           {[
-            { label: 'Positive', value: lesson.formula.positive, icon: '✓' },
-            { label: 'Negative', value: lesson.formula.negative, icon: '✗' },
-            { label: 'Question', value: lesson.formula.question, icon: '?' },
+            { label: t('lesson.positive'), value: lesson.formula.positive, icon: '✓' },
+            { label: t('lesson.negative'), value: lesson.formula.negative, icon: '✗' },
+            { label: t('lesson.question'), value: lesson.formula.question, icon: '?' },
           ].map((f, i) => (
             <div
               key={i}
@@ -148,7 +160,7 @@ export default function LessonDetail() {
         transition={{ duration: 0.3, delay: 0.2 }}
         className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
       >
-        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">Examples</h2>
+        <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.examples')}</h2>
         <div className="space-y-3">
           {lesson.examples.map((ex, i) => (
             <div
@@ -156,7 +168,7 @@ export default function LessonDetail() {
               className="rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
             >
               <p className="text-sm font-medium text-zinc-900 dark:text-white">{ex.en}</p>
-              <p className="mt-1 text-xs text-zinc-400">{ex.cn}</p>
+              <p className="mt-1 text-xs text-zinc-400">{getExampleTranslation(ex, locale)}</p>
             </div>
           ))}
         </div>
@@ -168,7 +180,7 @@ export default function LessonDetail() {
           transition={{ duration: 0.3, delay: 0.25 }}
           className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
         >
-          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">Common Mistakes</h2>
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.commonMistakes')}</h2>
           <div className="space-y-3">
             {lesson.mistakes.map((m, i) => (
               <div key={i} className="space-y-2">
@@ -191,7 +203,7 @@ export default function LessonDetail() {
         transition={{ duration: 0.3, delay: 0.3 }}
         className="mb-8"
       >
-        <h2 className="mb-4 text-xl font-bold text-zinc-900 dark:text-white">Quiz</h2>
+        <h2 className="mb-4 text-xl font-bold text-zinc-900 dark:text-white">{t('lesson.quiz')}</h2>
         <QuizCard quiz={lesson.quiz} onComplete={handleQuizComplete} />
       </motion.div>
     </div>

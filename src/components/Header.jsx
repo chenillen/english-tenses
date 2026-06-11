@@ -1,28 +1,57 @@
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import useTheme from '../hooks/useTheme'
 import useProgress from '../store/progress'
 import ProgressBar from './ProgressBar'
 
+const languages = [
+  { code: 'en', label: 'EN', flag: '🇺🇸' },
+  { code: 'zh', label: '中文', flag: '🇨🇳' },
+  { code: 'ja', label: '日本語', flag: '🇯🇵' },
+]
+
 export default function Header() {
+  const { t, i18n } = useTranslation()
   const { theme, toggleTheme } = useTheme()
   const getOverallProgress = useProgress((s) => s.getOverallProgress)
+
+  const changeLanguage = (code) => {
+    i18n.changeLanguage(code)
+  }
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-xl dark:border-zinc-800 dark:bg-zinc-950/80">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 sm:px-6">
-        <Link to="/" className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight text-zinc-900 dark:text-white">
-            English Tenses
+        <Link to="/" className="flex items-center gap-2 shrink-0">
+          <span className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white sm:text-xl">
+            {t('app.title')}
           </span>
         </Link>
 
-        <div className="flex items-center gap-3 sm:gap-4">
+        <div className="flex items-center gap-2 sm:gap-3">
           <ProgressBar
             current={getOverallProgress()}
             total={12}
             className="hidden sm:flex"
           />
+
+          <div className="flex items-center rounded-xl bg-zinc-100 p-0.5 dark:bg-zinc-800">
+            {languages.map((lang) => (
+              <button
+                key={lang.code}
+                onClick={() => changeLanguage(lang.code)}
+                className={`rounded-lg px-2 py-1 text-xs font-medium transition-all sm:px-2.5 sm:text-sm ${
+                  i18n.language?.startsWith(lang.code)
+                    ? 'bg-white text-zinc-900 shadow-sm dark:bg-zinc-700 dark:text-white'
+                    : 'text-zinc-500 hover:text-zinc-700 dark:text-zinc-400 dark:hover:text-zinc-200'
+                }`}
+                aria-label={`Switch language to ${lang.label}`}
+              >
+                <span className="hidden sm:inline">{lang.label}</span>
+                <span className="sm:hidden">{lang.code.toUpperCase()}</span>
+              </button>
+            ))}
+          </div>
 
           <button
             onClick={toggleTheme}

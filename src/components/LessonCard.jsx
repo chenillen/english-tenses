@@ -1,12 +1,5 @@
 import { motion } from 'framer-motion'
-
-const colorMap = {
-  blue: 'bg-blue-50 border-blue-200 text-blue-700 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-300',
-  orange: 'bg-orange-50 border-orange-200 text-orange-700 dark:bg-orange-950 dark:border-orange-800 dark:text-orange-300',
-  purple: 'bg-purple-50 border-purple-200 text-purple-700 dark:bg-purple-950 dark:border-purple-800 dark:text-purple-300',
-  green: 'bg-green-50 border-green-200 text-green-700 dark:bg-green-950 dark:border-green-800 dark:text-green-300',
-  red: 'bg-red-50 border-red-200 text-red-700 dark:bg-red-950 dark:border-red-800 dark:text-red-300',
-}
+import { useTranslation } from 'react-i18next'
 
 const bgColorMap = {
   blue: 'bg-blue-500',
@@ -16,7 +9,6 @@ const bgColorMap = {
   red: 'bg-red-500',
 }
 
-const levelNames = ['', 'Beginner', 'Intermediate', 'Advanced', 'Expert']
 const levelColors = [
   '',
   'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
@@ -26,6 +18,12 @@ const levelColors = [
 ]
 
 export default function LessonCard({ lesson, completed, score, index }) {
+  const { t } = useTranslation()
+
+  const name = t(`lessons.${lesson.slug}.name`)
+  const description = t(`lessons.${lesson.slug}.description`)
+  const difficultyLabel = t(`difficulty.${lesson.difficulty}`)
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -46,22 +44,22 @@ export default function LessonCard({ lesson, completed, score, index }) {
         </div>
         <div className="flex flex-col gap-0.5">
           <span className="text-xs font-medium text-zinc-400 uppercase tracking-wide">
-            Level {lesson.level}
+            {t('home.level')} {lesson.level}
           </span>
           <span className={`inline-flex w-fit rounded-lg px-2 py-0.5 text-[10px] font-semibold ${levelColors[lesson.level]}`}>
-            {levelNames[lesson.level]}
+            {difficultyLabel}
           </span>
         </div>
       </div>
 
       <h3 className="mb-1 text-lg font-semibold text-zinc-900 dark:text-white">
-        {lesson.name}
+        {name}
       </h3>
       <p className="mb-3 text-sm text-zinc-500 dark:text-zinc-400">
-        {lesson.chineseName}
+        {t(`lessons.${lesson.slug}.name`, { lng: 'en' })}
       </p>
       <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-        {lesson.description}
+        {description}
       </p>
 
       {score !== undefined && score !== null && (
@@ -76,7 +74,7 @@ export default function LessonCard({ lesson, completed, score, index }) {
               />
             </div>
           </div>
-          <span className="text-xs font-medium text-zinc-400">{score}%</span>
+          <span className="text-xs font-medium tabular-nums text-zinc-400">{score}%</span>
         </div>
       )}
     </motion.div>

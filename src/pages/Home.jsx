@@ -1,18 +1,15 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import lessons from '../data/lessons'
 import useProgress from '../store/progress'
 import LessonCard from '../components/LessonCard'
 import ProgressBar from '../components/ProgressBar'
 
-const levels = [
-  { level: 1, label: 'Simple Tenses', desc: 'Foundation' },
-  { level: 2, label: 'Continuous Tenses', desc: 'In Progress' },
-  { level: 3, label: 'Perfect Tenses', desc: 'Advanced' },
-  { level: 4, label: 'Perfect Continuous', desc: 'Expert' },
-]
+const levels = [1, 2, 3, 4]
 
 export default function Home() {
+  const { t } = useTranslation()
   const completedLessons = useProgress((s) => s.completedLessons)
   const quizScores = useProgress((s) => s.quizScores)
   const getOverallProgress = useProgress((s) => s.getOverallProgress)
@@ -25,7 +22,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           className="mb-2 text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl"
         >
-          English Tenses
+          {t('app.title')}
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: -4 }}
@@ -33,7 +30,7 @@ export default function Home() {
           transition={{ delay: 0.05 }}
           className="text-zinc-500 dark:text-zinc-400"
         >
-          Master all 12 English tenses
+          {t('app.subtitle')}
         </motion.p>
 
         <motion.div
@@ -49,7 +46,7 @@ export default function Home() {
               </span>
               <span className="text-sm text-zinc-400"> / 12</span>
               <span className="ml-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
-                lessons completed
+                {t('home.lessonsCompleted')}
               </span>
             </div>
             <span className="text-sm font-semibold tabular-nums text-zinc-500 dark:text-zinc-400">
@@ -60,12 +57,12 @@ export default function Home() {
         </motion.div>
       </div>
 
-      {levels.map((lvl, lvlIndex) => {
-        const levelLessons = lessons.filter((l) => l.level === lvl.level)
+      {levels.map((level, lvlIndex) => {
+        const levelLessons = lessons.filter((l) => l.level === level)
         if (levelLessons.length === 0) return null
 
         return (
-          <div key={lvl.level} className="mb-10">
+          <div key={level} className="mb-10">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -73,9 +70,9 @@ export default function Home() {
               className="mb-4"
             >
               <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
-                {lvl.label}
+                {t(`home.levelLabels.${level}`)}
               </h2>
-              <p className="text-sm text-zinc-400">{lvl.desc}</p>
+              <p className="text-sm text-zinc-400">{t(`home.levelDescs.${level}`)}</p>
             </motion.div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
