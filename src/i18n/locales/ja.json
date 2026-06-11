@@ -66,6 +66,7 @@
       "usage": "使い方",
       "grammarFormula": "文法公式",
       "examples": "例文",
+      "trickyExamples": "注意すべき例文 / エッジケース",
       "commonMistakes": "よくある間違い",
       "quiz": "クイズ",
       "positive": "肯定文",

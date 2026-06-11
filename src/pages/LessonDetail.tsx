@@ -4,9 +4,10 @@ import { useTranslation } from 'react-i18next'
 import lessons from '../data/lessons'
 import useProgress from '../store/progress'
 import useLocale from '../hooks/useLocale'
+import { useSpeech } from '../hooks/useSpeech'
 import Timeline from '../components/Timeline'
 import QuizCard from '../components/QuizCard'
-import type { Example, Locale, Mistake, ColorFullMap } from '../types'
+import type { Example, TrickyExample, Locale, Mistake, ColorFullMap } from '../types'
 
 const colorStyles: ColorFullMap = {
   blue: { bg: 'bg-blue-50 dark:bg-blue-950', light: 'bg-blue-50 dark:bg-blue-950', text: 'text-blue-600 dark:text-blue-400', badge: 'bg-blue-500' },
@@ -28,6 +29,50 @@ interface FormulaItem {
   icon: string
 }
 
+function SpeakerButton({
+  text,
+  speakingText,
+  ttsSupported,
+  onClick,
+}: {
+  text: string
+  speakingText: string | null
+  ttsSupported: boolean
+  onClick: () => void
+}) {
+  if (!ttsSupported) return null
+
+  const isActive = speakingText === text
+
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`ml-2 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors ${
+        isActive
+          ? 'bg-blue-500 text-white'
+          : 'bg-zinc-200 text-zinc-500 hover:bg-blue-100 hover:text-blue-600 dark:bg-zinc-700 dark:text-zinc-400 dark:hover:bg-blue-900 dark:hover:text-blue-400'
+      }`}
+      aria-label={isActive ? 'Stop reading' : 'Read aloud'}
+      title={isActive ? 'Stop reading' : 'Listen'}
+    >
+      {isActive ? (
+        <span className="flex gap-0.5">
+          <span className="h-2.5 w-0.5 animate-bounce rounded-full bg-white [animation-delay:0ms]" />
+          <span className="h-2.5 w-0.5 animate-bounce rounded-full bg-white [animation-delay:150ms]" />
+          <span className="h-2.5 w-0.5 animate-bounce rounded-full bg-white [animation-delay:300ms]" />
+        </span>
+      ) : (
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" />
+          <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+          <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+        </svg>
+      )}
+    </button>
+  )
+}
+
 export default function LessonDetail() {
   const { t } = useTranslation()
   const locale = useLocale()
@@ -36,6 +81,7 @@ export default function LessonDetail() {
   const completeLesson = useProgress((s) => s.completeLesson)
   const setQuizScore = useProgress((s) => s.setQuizScore)
   const getLessonProgress = useProgress((s) => s.getLessonProgress)
+  const { speak, stop, speakingText, supported: ttsSupported } = useSpeech()
 
   if (!lesson) {
     return (
@@ -57,6 +103,14 @@ export default function LessonDetail() {
     setQuizScore(lesson.slug, score)
     completeLesson(lesson.slug)
     window.scrollTo({ top: 0, behavior: 'smooth' })
+  }
+
+  const handlePlayExample = (text: string) => {
+    if (speakingText === text) {
+      stop()
+    } else {
+      speak(text)
+    }
   }
 
   const fadeUp = {
@@ -176,12 +230,52 @@ export default function LessonDetail() {
               key={i}
               className="rounded-2xl bg-zinc-50 p-4 dark:bg-zinc-800"
             >
-              <p className="text-sm font-medium text-zinc-900 dark:text-white">{ex.en}</p>
+              <div className="flex items-start justify-between gap-2">
+                <p className="text-sm font-medium text-zinc-900 dark:text-white">{ex.en}</p>
+                <SpeakerButton
+                  text={ex.en}
+                  speakingText={speakingText}
+                  ttsSupported={ttsSupported}
+                  onClick={() => handlePlayExample(ex.en)}
+                />
+              </div>
               <p className="mt-1 text-xs text-zinc-400">{getExampleTranslation(ex, locale)}</p>
             </div>
           ))}
         </div>
       </motion.div>
+
+      {lesson.trickyExamples && lesson.trickyExamples.length > 0 && (
+        <motion.div
+          {...fadeUp}
+          transition={{ duration: 0.3, delay: 0.22 }}
+          className="mb-8 rounded-3xl border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+        >
+          <h2 className="mb-4 text-sm font-semibold uppercase tracking-wide text-zinc-400">{t('lesson.trickyExamples')}</h2>
+          <div className="space-y-3">
+            {lesson.trickyExamples.map((ex: TrickyExample, i: number) => (
+              <div
+                key={i}
+                className="rounded-2xl bg-amber-50 p-4 dark:bg-amber-950"
+              >
+                <div className="flex items-start justify-between gap-2">
+                  <p className="text-sm font-medium text-amber-900 dark:text-amber-100">{ex.en}</p>
+                  <SpeakerButton
+                    text={ex.en}
+                    speakingText={speakingText}
+                    ttsSupported={ttsSupported}
+                    onClick={() => handlePlayExample(ex.en)}
+                  />
+                </div>
+                <p className="mt-1 text-xs text-amber-600 dark:text-amber-400">{getExampleTranslation(ex, locale)}</p>
+                <p className="mt-2 rounded-lg bg-amber-100 px-3 py-1.5 text-xs leading-relaxed text-amber-800 dark:bg-amber-900 dark:text-amber-200">
+                  {ex.explanation}
+                </p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+      )}
 
       {lesson.mistakes && lesson.mistakes.length > 0 && (
         <motion.div
