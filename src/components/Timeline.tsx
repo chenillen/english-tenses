@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
+import type { TColor, TimelineType, ColorMap } from '../types'
 
-const colorMap = {
+const colorMap: ColorMap = {
   blue: { bg: 'bg-blue-500', light: 'bg-blue-100 dark:bg-blue-900', text: 'text-blue-600 dark:text-blue-400' },
   orange: { bg: 'bg-orange-500', light: 'bg-orange-100 dark:bg-orange-900', text: 'text-orange-600 dark:text-orange-400' },
   purple: { bg: 'bg-purple-500', light: 'bg-purple-100 dark:bg-purple-900', text: 'text-purple-600 dark:text-purple-400' },
@@ -8,7 +9,15 @@ const colorMap = {
   red: { bg: 'bg-red-500', light: 'bg-red-100 dark:bg-red-900', text: 'text-red-600 dark:text-red-400' },
 }
 
-function SimpleTimeline({ color, point, label }) {
+type PointType = 'past' | 'present' | 'future'
+
+interface SimpleTimelineProps {
+  color: TColor
+  point: PointType
+  label: [string, string]
+}
+
+function SimpleTimeline({ color, point, label }: SimpleTimelineProps) {
   const c = colorMap[color] || colorMap.blue
 
   return (
@@ -41,10 +50,15 @@ function SimpleTimeline({ color, point, label }) {
   )
 }
 
-function ContinuousTimeline({ color, position }) {
+interface ContinuousTimelineProps {
+  color: TColor
+  position: string
+}
+
+function ContinuousTimeline({ color, position }: ContinuousTimelineProps) {
   const c = colorMap[color] || colorMap.green
 
-  const positionMap = {
+  const positionMap: Record<string, { left: string; width: string; label: string }> = {
     'continuous-present': { left: '33%', width: '33%', label: 'Present' },
     'continuous-past': { left: '0%', width: '33%', label: 'Past' },
     'continuous-future': { left: '66%', width: '33%', label: 'Future' },
@@ -83,10 +97,15 @@ function ContinuousTimeline({ color, position }) {
   )
 }
 
-function PerfectTimeline({ color, position }) {
+interface PerfectTimelineProps {
+  color: TColor
+  position: string
+}
+
+function PerfectTimeline({ color, position }: PerfectTimelineProps) {
   const c = colorMap[color] || colorMap.red
 
-  const positionMap = {
+  const positionMap: Record<string, { start: string; end: string }> = {
     'perfect-present': { start: '0%', end: '50%' },
     'perfect-past': { start: '0%', end: '16%' },
     'perfect-future': { start: '0%', end: '83%' },
@@ -122,10 +141,15 @@ function PerfectTimeline({ color, position }) {
   )
 }
 
-function PerfectContinuousTimeline({ color, position }) {
+interface PerfectContinuousTimelineProps {
+  color: TColor
+  position: string
+}
+
+function PerfectContinuousTimeline({ color, position }: PerfectContinuousTimelineProps) {
   const c = colorMap[color] || colorMap.green
 
-  const positionMap = {
+  const positionMap: Record<string, { start: string; width: string }> = {
     'perfect-continuous-present': { start: '0%', width: '50%' },
     'perfect-continuous-past': { start: '0%', width: '16%' },
     'perfect-continuous-future': { start: '0%', width: '83%' },
@@ -164,14 +188,18 @@ function PerfectContinuousTimeline({ color, position }) {
   )
 }
 
-export default function Timeline({ type, color }) {
+export default function Timeline({ type, color }: { type: TimelineType; color: TColor }) {
   if (type === 'present-center' || type === 'past-point' || type === 'future-point') {
-    const labelMap = {
+    const labelMap: Record<string, [string, string]> = {
       'present-center': ['Past', 'Future'],
       'past-point': ['Past', 'Future'],
       'future-point': ['Past', 'Future'],
     }
-    const pointMap = { 'present-center': 'present', 'past-point': 'past', 'future-point': 'future' }
+    const pointMap: Record<string, PointType> = {
+      'present-center': 'present',
+      'past-point': 'past',
+      'future-point': 'future',
+    }
     return <SimpleTimeline color={color} point={pointMap[type]} label={labelMap[type]} />
   }
 
