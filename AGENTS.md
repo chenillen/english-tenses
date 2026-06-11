@@ -8,7 +8,7 @@ Single-page React app deployed to GitHub Pages. No backend, no database.
 |-------|-------|
 | Build | Vite 7, `base: '/english-tenses/'` |
 | UI | React 19, TailwindCSS 4, Framer Motion |
-| Routing | react-router-dom v7, `BrowserRouter basename="/english-tenses/"` |
+| Routing | react-router-dom v7, `BrowserRouter basename="/english-tenses"` |
 | State | Zustand with `persist` middleware (`localStorage`) |
 | i18n | i18next + react-i18next, browser language detection |
 | Lang | TypeScript 5, strict mode, `noEmit` |
@@ -30,7 +30,7 @@ src/
 
 ### Vite base and Router basename must stay in sync
 
-Both are `/english-tenses/`. Changing one without the other breaks assets or routing on GitHub Pages.
+Vite's `base` in `vite.config.ts` should include a trailing slash (e.g. `/english-tenses/`) while React Router's `BrowserRouter basename` in `src/App.tsx` should omit the trailing slash (e.g. `/english-tenses`). The two values must match in path content (not exact string) so assets and routing work on GitHub Pages.
 
 ### TailwindCSS v4
 
