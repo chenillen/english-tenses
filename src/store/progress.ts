@@ -1,6 +1,6 @@
-import { create } from 'zustand'
-import { persist } from 'zustand/middleware'
-import type { ProgressState } from '../types'
+import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
+import type { ProgressState } from '../types';
 
 const useProgress = create<ProgressState>()(
   persist(
@@ -21,22 +21,21 @@ const useProgress = create<ProgressState>()(
         })),
 
       getLessonProgress: (slug: string) => {
-        const state = get()
-        return state.completedLessons.includes(slug)
+        const state = get();
+        return state.completedLessons.includes(slug);
       },
 
       getOverallProgress: () => {
-        const state = get()
-        return state.completedLessons.length
+        const state = get();
+        return state.completedLessons.length;
       },
 
-      resetProgress: () =>
-        set({ completedLessons: [], quizScores: {} }),
+      resetProgress: () => set({ completedLessons: [], quizScores: {} }),
     }),
     {
-      name: 'english-tenses-progress',
-    }
-  )
-)
+      name: 'tense-craft-progress',
+    },
+  ),
+);
 
-export default useProgress
+export default useProgress;

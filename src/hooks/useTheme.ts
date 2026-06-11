@@ -1,33 +1,35 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback } from 'react';
 
-type Theme = 'light' | 'dark'
+type Theme = 'light' | 'dark';
 
 interface UseThemeReturn {
-  theme: Theme
-  toggleTheme: () => void
+  theme: Theme;
+  toggleTheme: () => void;
 }
 
 export default function useTheme(): UseThemeReturn {
   const [theme, setTheme] = useState<Theme>(() => {
-    if (typeof window === 'undefined') return 'light'
-    const stored = localStorage.getItem('english-tenses-theme')
-    if (stored === 'dark' || stored === 'light') return stored
-    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-  })
+    if (typeof window === 'undefined') return 'light';
+    const stored = localStorage.getItem('tense-craft-theme');
+    if (stored === 'dark' || stored === 'light') return stored;
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  });
 
   useEffect(() => {
-    const root = document.documentElement
+    const root = document.documentElement;
     if (theme === 'dark') {
-      root.classList.add('dark')
+      root.classList.add('dark');
     } else {
-      root.classList.remove('dark')
+      root.classList.remove('dark');
     }
-    localStorage.setItem('english-tenses-theme', theme)
-  }, [theme])
+    localStorage.setItem('tense-craft-theme', theme);
+  }, [theme]);
 
   const toggleTheme = useCallback(() => {
-    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'))
-  }, [])
+    setTheme((prev) => (prev === 'dark' ? 'light' : 'dark'));
+  }, []);
 
-  return { theme, toggleTheme }
+  return { theme, toggleTheme };
 }
