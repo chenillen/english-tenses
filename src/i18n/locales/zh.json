@@ -66,6 +66,7 @@
       "usage": "用法",
       "grammarFormula": "语法公式",
       "examples": "例句",
+      "trickyExamples": "易错例句 / 边界情况",
       "commonMistakes": "常见错误",
       "quiz": "测验",
       "positive": "肯定句",

@@ -1,48 +1,18 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
+import { ArrowRight } from '@phosphor-icons/react'
 import { seedFromDate } from '../utils/seeds'
+import { badgeColor, colorBasic, levelColors } from '../utils/colors'
 import type { DailyTenseHeroProps, TColor } from '../types'
 
-const bgColorMap: Record<TColor, string> = {
-  blue: 'bg-blue-500',
-  orange: 'bg-orange-500',
-  purple: 'bg-purple-500',
-  green: 'bg-green-500',
-  red: 'bg-red-500',
-}
-
 const borderColorMap: Record<TColor, string> = {
-  blue: 'border-blue-200 dark:border-blue-800',
-  orange: 'border-orange-200 dark:border-orange-800',
-  purple: 'border-purple-200 dark:border-purple-800',
-  green: 'border-green-200 dark:border-green-800',
-  red: 'border-red-200 dark:border-red-800',
+  blue: 'border-present-bg dark:border-[#1A3A4D]',
+  orange: 'border-past-bg dark:border-[#3A2A1A]',
+  purple: 'border-future-bg dark:border-[#2A2040]',
+  green: 'border-continuous-bg dark:border-[#1A2A1A]',
+  red: 'border-perfect-bg dark:border-[#3A1A1A]',
 }
-
-const lightColorMap: Record<TColor, string> = {
-  blue: 'bg-blue-50 dark:bg-blue-950',
-  orange: 'bg-orange-50 dark:bg-orange-950',
-  purple: 'bg-purple-50 dark:bg-purple-950',
-  green: 'bg-green-50 dark:bg-green-950',
-  red: 'bg-red-50 dark:bg-red-950',
-}
-
-const textColorMap: Record<TColor, string> = {
-  blue: 'text-blue-600 dark:text-blue-400',
-  orange: 'text-orange-600 dark:text-orange-400',
-  purple: 'text-purple-600 dark:text-purple-400',
-  green: 'text-green-600 dark:text-green-400',
-  red: 'text-red-600 dark:text-red-400',
-}
-
-const levelColors: string[] = [
-  '',
-  'bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300',
-  'bg-amber-100 text-amber-700 dark:bg-amber-900 dark:text-amber-300',
-  'bg-rose-100 text-rose-700 dark:bg-rose-900 dark:text-rose-300',
-  'bg-violet-100 text-violet-700 dark:bg-violet-900 dark:text-violet-300',
-]
 
 export default function DailyTenseHero({ lessons }: DailyTenseHeroProps) {
   const { t } = useTranslation()
@@ -50,10 +20,9 @@ export default function DailyTenseHero({ lessons }: DailyTenseHeroProps) {
   const dailyIndex = seedFromDate() % lessons.length
   const lesson = lessons[dailyIndex]
 
-  const bg = bgColorMap[lesson.color]
+  const bg = badgeColor[lesson.color]
   const border = borderColorMap[lesson.color]
-  const light = lightColorMap[lesson.color]
-  const textCol = textColorMap[lesson.color]
+  const c = colorBasic[lesson.color]
   const levelBadge = levelColors[lesson.level]
 
   return (
@@ -64,50 +33,47 @@ export default function DailyTenseHero({ lessons }: DailyTenseHeroProps) {
     >
       <Link
         to={`/lesson/${lesson.slug}`}
-        className="group block overflow-hidden rounded-3xl border border-zinc-200 bg-white transition-colors hover:border-zinc-300 dark:border-zinc-800 dark:bg-zinc-900 dark:hover:border-zinc-700"
+        className="group block overflow-hidden rounded-xl border border-border bg-surface transition-all duration-200 hover:border-border-hover hover:shadow-[0_2px_12px_rgba(0,0,0,0.04)] dark:border-[#2A2A2A] dark:bg-[#1A1A1A] dark:hover:border-[#333333] dark:hover:shadow-[0_2px_12px_rgba(0,0,0,0.15)]"
       >
         <div className="flex flex-col lg:flex-row">
           <div className={`flex items-center justify-center p-8 lg:w-48 lg:shrink-0 ${bg}`}>
             <motion.div
               animate={{ scale: [1, 1.05, 1] }}
               transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-              className="flex h-24 w-24 items-center justify-center rounded-3xl bg-white/20 backdrop-blur-sm"
+              className="flex h-24 w-24 items-center justify-center rounded-xl bg-white/20"
             >
-              <span className="text-4xl font-extrabold text-white drop-shadow-md">
+              <span className="text-4xl font-extrabold text-white">
                 {String(lesson.id).padStart(2, '0')}
               </span>
             </motion.div>
           </div>
 
           <div className="flex flex-1 flex-col justify-center p-6 sm:p-8">
-            <div className="mb-1 flex items-center gap-3">
-              <span className={`inline-flex rounded-lg px-2.5 py-1 text-xs font-semibold ${levelBadge}`}>
+            <div className="mb-2 flex flex-wrap items-center gap-2">
+              <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wider ${levelBadge}`}>
                 {t('home.level')} {lesson.level}
               </span>
-              <span className={`inline-flex rounded-lg px-2.5 py-1 text-xs font-semibold ${light} ${textCol}`}>
+              <span className={`inline-flex rounded-full px-2.5 py-1 text-xs font-semibold uppercase tracking-wider ${c.bg} ${c.text}`}>
                 {t(`difficulty.${lesson.difficulty}`)}
               </span>
-              <span className="text-xs font-medium uppercase tracking-wider text-zinc-400">
+              <span className="text-xs font-medium uppercase tracking-wider text-text-muted dark:text-[#777777]">
                 {t('hero.todayTense')}
               </span>
             </div>
 
-            <h2 className="mb-2 text-2xl font-extrabold text-zinc-900 transition-colors group-hover:text-zinc-700 dark:text-white dark:group-hover:text-zinc-300 sm:text-3xl">
+            <h2 className="mb-2 font-heading text-2xl font-extrabold tracking-tight text-text-primary transition-colors group-hover:text-text-secondary dark:text-[#EDEDED] dark:group-hover:text-[#CCCCCC] sm:text-3xl">
               {t(`lessons.${lesson.slug}.name`)}
             </h2>
 
-            <p className="mb-4 max-w-lg text-zinc-500 dark:text-zinc-400">
+            <p className="mb-5 max-w-lg text-sm leading-relaxed text-text-secondary dark:text-[#9B9B9B]">
               {t(`lessons.${lesson.slug}.description`)}
             </p>
 
             <span
-              className={`inline-flex w-fit items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold transition-colors ${bg} text-white group-hover:opacity-90`}
+              className={`inline-flex w-fit items-center gap-2 rounded-md px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:opacity-90 ${bg}`}
             >
               {t('hero.startLearning')}
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <line x1="5" y1="12" x2="19" y2="12"/>
-                <polyline points="12 5 19 12 12 19"/>
-              </svg>
+              <ArrowRight weight="bold" size={16} />
             </span>
           </div>
         </div>

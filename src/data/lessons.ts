@@ -1,4 +1,4 @@
-import type { Lesson } from '../types'
+import type { Lesson, TrickyExample } from '../types'
 
 const lessons: Lesson[] = [
   {
@@ -20,6 +20,11 @@ const lessons: Lesson[] = [
       { en: 'The sun rises in the east.', cn: '太阳从东方升起。', ja: '太陽は東から昇ります。' },
       { en: 'They play football on weekends.', cn: '他们周末踢足球。', ja: '彼らは週末にサッカーをします。' },
     ],
+    trickyExamples: [
+      { en: 'The train leaves at 6 PM tonight.', cn: '火车今晚6点发车。', ja: '列車は今夜6時に出発します。', explanation: 'Simple present for scheduled future events. Not about "now" — this refers to a future timetable.' },
+      { en: 'He needs help right now.', cn: '他现在需要帮助。', ja: '彼は今助けが必要です。', explanation: 'Stative verbs (need, want, know, believe) use simple present, NOT present continuous. "He is needing" is WRONG.' },
+      { en: 'When you arrive tonight, we will go out.', cn: '你今晚到了之后，我们就出去。', ja: '今夜あなたが到着したら出かけましょう。', explanation: 'In time clauses with "when/before/after/if/unless", use simple present for future meaning — NOT "when you will arrive".' },
+    ],
     mistakes: [
       { wrong: 'He go to school.', correct: 'He goes to school.' },
       { wrong: 'She don\'t like coffee.', correct: 'She doesn\'t like coffee.' },
@@ -29,6 +34,8 @@ const lessons: Lesson[] = [
       { question: 'They ____ to the gym on Mondays.', options: ['go', 'goes', 'going', 'gone'], answer: 0 },
       { question: 'She ____ not like vegetables.', options: ['do', 'does', 'is', 'are'], answer: 1 },
       { question: 'Water ____ at 100 degrees Celsius.', options: ['boil', 'boils', 'boiling', 'boiled'], answer: 1 },
+      { question: 'The train ____ at 8 o\'clock every morning.', options: ['leave', 'leaves', 'is leaving', 'left'], answer: 1 },
+      { question: 'I ____ coffee, but my sister needs tea.', options: ['am not liking', 'don\'t like', 'doesn\'t like', 'not like'], answer: 1 },
     ],
   },
   {
@@ -50,6 +57,11 @@ const lessons: Lesson[] = [
       { en: 'They lived in London for two years.', cn: '他们在伦敦住了两年。', ja: '彼らはロンドンに2年間住んでいました。' },
       { en: 'He didn\'t come to the party.', cn: '他没有来参加聚会。', ja: '彼はパーティーに来ませんでした。' },
     ],
+    trickyExamples: [
+      { en: 'I lived in Brazil for two years.', cn: '我在巴西住过两年。', ja: '私はブラジルに2年間住んでいました。', explanation: 'Simple past for a finished duration — no longer lives there. Compare with present perfect "I have lived in Brazil for two years" which means still living there.' },
+      { en: 'When I paid her one dollar, she answered my question.', cn: '我付了她一美元后，她回答了我的问题。', ja: '彼女に1ドル払ったら質問に答えてくれました。', explanation: 'When-clause with simple past happens FIRST. Paying happened first, then answering.' },
+      { en: 'I always rode my bike to school when I was young.', cn: '我小时候总是骑自行车去学校。', ja: '子供の頃はいつも自転車で学校に通っていました。', explanation: 'Simple past for past habits. Same meaning as "used to ride". "Always" works with simple past, unlike present where continuous is used for irritation.' },
+    ],
     mistakes: [
       { wrong: 'I go to the store yesterday.', correct: 'I went to the store yesterday.' },
       { wrong: 'She didn\'t went home.', correct: 'She didn\'t go home.' },
@@ -59,6 +71,8 @@ const lessons: Lesson[] = [
       { question: 'They ____ not finish their homework.', options: ['do', 'does', 'did', 'was'], answer: 2 },
       { question: 'I ____ breakfast at 7 AM this morning.', options: ['eat', 'eats', 'ate', 'eaten'], answer: 2 },
       { question: 'He ____ very happy yesterday.', options: ['is', 'was', 'were', 'are'], answer: 1 },
+      { question: 'I ____ in London for five years before I moved back.', options: ['live', 'lived', 'have lived', 'was living'], answer: 1 },
+      { question: 'She ____ to see a bear until she moved to Alaska.', options: ['had never seen', 'never saw', 'has never seen', 'never sees'], answer: 1 },
     ],
   },
   {
@@ -80,6 +94,11 @@ const lessons: Lesson[] = [
       { en: 'They won\'t come to the meeting.', cn: '他们不会来参加会议。', ja: '彼らは会議に来ません。' },
       { en: 'Will you help me?', cn: '你会帮我吗？', ja: '手伝ってくれますか？' },
     ],
+    trickyExamples: [
+      { en: 'I\'ll make some sandwiches.', cn: '我来做一些三明治。', ja: 'サンドイッチを作りますよ。', explanation: '"Will" for spontaneous decisions made at the moment of speaking. NOT "I\'m going to make..." which implies a prior plan.' },
+      { en: 'I will call you when I arrive.', cn: '我到的时候会打电话给你。', ja: '到着したら電話します。', explanation: '"Will" for promises. Also note: the time clause uses present tense "arrive", NOT "will arrive".' },
+      { en: 'He is going to spend his vacation in Hawaii.', cn: '他打算去夏威夷度假。', ja: '彼は休暇をハワイで過ごすつもりです。', explanation: '"Be going to" for prior plans/intentions. This is NOT a spontaneous decision — it was planned before speaking.' },
+    ],
     mistakes: [
       { wrong: 'He will goes to school.', correct: 'He will go to school.' },
       { wrong: 'I will not to eat that.', correct: 'I will not eat that.' },
@@ -89,6 +108,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ not be late tomorrow.', options: ['will', 'is', 'has', 'does'], answer: 0 },
       { question: '____ they arrive on time?', options: ['Do', 'Will', 'Are', 'Have'], answer: 1 },
       { question: 'We ____ go to the beach if it is sunny.', options: ['are', 'will', 'were', 'have'], answer: 1 },
+      { question: 'A: I\'m really hungry. B: I ____ make you something to eat.', options: ['am going to', 'will', 'go to', 'am'], answer: 1 },
+      { question: 'I will call you when I ____ home.', options: ['will get', 'get', 'am going to get', 'got'], answer: 1 },
     ],
   },
   {
@@ -110,6 +131,11 @@ const lessons: Lesson[] = [
       { en: 'They are playing in the park.', cn: '他们正在公园里玩。', ja: '彼らは公園で遊んでいます。' },
       { en: 'He is working on a new project.', cn: '他正在做一个新项目。', ja: '彼は新しいプロジェクトに取り組んでいます。' },
     ],
+    trickyExamples: [
+      { en: 'I am meeting some friends after work.', cn: '我下班后要见几个朋友。', ja: '仕事の後で友達に会う予定です。', explanation: 'Present continuous for future arrangements (fixed plans). Not happening right now — this is about a planned future event.' },
+      { en: 'She is always coming to class late.', cn: '她总是上课迟到。', ja: '彼女はいつも授業に遅れてきます。', explanation: 'Present continuous + "always" expresses IRRITATION. Simple present "She always comes" is neutral — just a fact. The continuous form adds negative emotion.' },
+      { en: 'I am seeing the doctor tomorrow.', cn: '我明天去看医生。', ja: '明日医者に診てもらう予定です。', explanation: '"See" is normally a stative verb (no continuous), but when it means "visit/meet", it CAN use continuous form.' },
+    ],
     mistakes: [
       { wrong: 'I am go to school now.', correct: 'I am going to school now.' },
       { wrong: 'She is work right now.', correct: 'She is working right now.' },
@@ -119,6 +145,8 @@ const lessons: Lesson[] = [
       { question: 'They ____ playing football at the moment.', options: ['is', 'are', 'am', 'be'], answer: 1 },
       { question: 'I ____ not watching TV now.', options: ['is', 'are', 'am', 'be'], answer: 2 },
       { question: 'He ____ to music now.', options: ['listen', 'listens', 'is listening', 'listening'], answer: 2 },
+      { question: 'I ____ my friends for dinner tonight.', options: ['meet', 'meets', 'am meeting', 'meeting'], answer: 2 },
+      { question: 'He ____ always ____ his keys!', options: ['is / losing', 'is / lose', 'does / lose', 'has / lost'], answer: 0 },
     ],
   },
   {
@@ -140,6 +168,11 @@ const lessons: Lesson[] = [
       { en: 'They were playing while it was raining.', cn: '下雨时他们正在玩。', ja: '雨が降っている間彼らは遊んでいました。' },
       { en: 'We were having dinner when he arrived.', cn: '他到达时我们正在吃晚饭。', ja: '彼が到着したとき私たちは夕食をとっていました。' },
     ],
+    trickyExamples: [
+      { en: 'At 6 PM, I was eating dinner.', cn: '下午6点的时候，我正在吃晚饭。', ja: '午後6時の時点で夕食を食べていました。', explanation: 'Past continuous for an action ALREADY in progress at a specific time. "I ate dinner at 6 PM" means started at 6 — different meaning.' },
+      { en: 'While I was studying, she called.', cn: '我正在学习的时候，她打来了电话。', ja: '勉強している間に彼女から電話がありました。', explanation: '"While" is typically followed by past continuous. "When" is typically followed by simple past. The interruption uses simple past.' },
+      { en: 'He was always complaining about the weather.', cn: '他总是抱怨天气。', ja: '彼はいつも天気の文句を言っていました。', explanation: 'Past continuous + "always" expresses IRRITATION. Simple past "He always complained" is neutral.' },
+    ],
     mistakes: [
       { wrong: 'I was watch TV.', correct: 'I was watching TV.' },
       { wrong: 'They was playing outside.', correct: 'They were playing outside.' },
@@ -149,6 +182,8 @@ const lessons: Lesson[] = [
       { question: 'They ____ playing outside at 3 PM.', options: ['was', 'were', 'is', 'are'], answer: 1 },
       { question: 'She ____ not sleeping at midnight.', options: ['was', 'were', 'is', 'are'], answer: 0 },
       { question: 'While I ____ walking, I saw a cat.', options: ['am', 'is', 'was', 'were'], answer: 2 },
+      { question: 'At 8 PM last night, I ____ dinner.', options: ['ate', 'was eating', 'have eaten', 'eat'], answer: 1 },
+      { question: '____ I was cooking, the power went out.', options: ['When', 'While', 'During', 'At'], answer: 1 },
     ],
   },
   {
@@ -170,6 +205,11 @@ const lessons: Lesson[] = [
       { en: 'They will be traveling to Japan next month.', cn: '他们下个月将去日本旅行。', ja: '彼らは来月日本に旅行しているでしょう。' },
       { en: 'This time next week, I will be relaxing on the beach.', cn: '下周这个时候，我将在海滩上放松。', ja: '来週の今頃、ビーチでリラックスしているでしょう。' },
     ],
+    trickyExamples: [
+      { en: 'Tonight at 6 PM, I will be eating dinner.', cn: '今晚6点，我将正在吃晚饭。', ja: '今夜6時には夕食を食べているでしょう。', explanation: 'Future continuous for an action IN PROGRESS at a specific future time. "I will eat at 6 PM" means start at 6 — different meaning.' },
+      { en: 'I will be watching TV when she arrives tonight.', cn: '她今晚到的时候，我将正在看电视。', ja: '今夜彼女が到着するときテレビを見ているでしょう。', explanation: 'Longer future action (future continuous) interrupted by a shorter one (present simple in time clause). The time clause uses "arrives" NOT "will arrive".' },
+      { en: 'Will you be using the car tomorrow?', cn: '你明天要用车吗？', ja: '明日車を使いますか？', explanation: 'Future continuous for POLITE inquiries about plans. More polite than "Will you use the car?" which can sound like a demand.' },
+    ],
     mistakes: [
       { wrong: 'I will be study tonight.', correct: 'I will be studying tonight.' },
       { wrong: 'She will working tomorrow.', correct: 'She will be working tomorrow.' },
@@ -179,6 +219,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ not be sleeping at that time.', options: ['will', 'is', 'was', 'has'], answer: 0 },
       { question: 'This time next month, they ____ traveling.', options: ['will be', 'are', 'were', 'have'], answer: 0 },
       { question: 'We ____ waiting for you when you arrive.', options: ['will be', 'are', 'were', 'have been'], answer: 0 },
+      { question: 'At this time tomorrow, I ____ to London.', options: ['fly', 'will fly', 'will be flying', 'am fly'], answer: 2 },
+      { question: '____ you ____ your laptop this afternoon?', options: ['Are / use', 'Will / be using', 'Do / use', 'Have / used'], answer: 1 },
     ],
   },
   {
@@ -200,6 +242,11 @@ const lessons: Lesson[] = [
       { en: 'They have lived here since 2010.', cn: '他们从2010年起就住在这里。', ja: '彼らは2010年からここに住んでいます。' },
       { en: 'He has just arrived.', cn: '他刚到。', ja: '彼はちょうど到着しました。' },
     ],
+    trickyExamples: [
+      { en: 'I have seen that movie.', cn: '我看过那部电影。', ja: 'その映画を見たことがあります。', explanation: 'Present perfect for experience — no specific time given. Contrast: "I saw that movie yesterday" needs simple past because of the specific time.' },
+      { en: 'I have been to Mexico in the last year.', cn: '在过去一年里我去过墨西哥。', ja: 'この1年でメキシコに行きました。', explanation: '"In the last year" = from 365 days ago until now → present perfect. "Last year" = specific finished time → simple past "I went to Mexico last year."' },
+      { en: 'James has not finished his homework yet.', cn: '詹姆斯还没完成作业。', ja: 'ジェームズはまだ宿題を終えていません。', explanation: 'Present perfect with "yet" implies an expected but not-yet-completed action. The result connects to the present moment.' },
+    ],
     mistakes: [
       { wrong: 'I have went to Japan.', correct: 'I have gone to Japan.' },
       { wrong: 'She has go to the store.', correct: 'She has gone to the store.' },
@@ -209,6 +256,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ already eaten lunch.', options: ['has', 'have', 'is', 'was'], answer: 0 },
       { question: 'They ____ not finished their work yet.', options: ['has', 'have', 'is', 'are'], answer: 1 },
       { question: 'We ____ known each other for 10 years.', options: ['has', 'have', 'is', 'are'], answer: 1 },
+      { question: 'I ____ that movie yesterday.', options: ['have seen', 'saw', 'have saw', 'seen'], answer: 1 },
+      { question: 'She ____ in London since 2015.', options: ['has lived', 'lived', 'lives', 'is living'], answer: 0 },
     ],
   },
   {
@@ -230,6 +279,11 @@ const lessons: Lesson[] = [
       { en: 'They had never seen snow before.', cn: '他们之前从未见过雪。', ja: '彼らはそれまで雪を見たことがありませんでした。' },
       { en: 'By the time we got there, the movie had started.', cn: '我们到达时，电影已经开始了。', ja: '私たちが着いたとき映画はすでに始まっていました。' },
     ],
+    trickyExamples: [
+      { en: 'She had never seen a bear before she moved to Alaska.', cn: '她搬到阿拉斯加之前从未见过熊。', ja: 'アラスカに引っ越す前、彼女は一度も熊を見たことがありませんでした。', explanation: 'Past perfect REQUIRED for lack of experience before another past point. Simple past "She never saw a bear before..." is WRONG here.' },
+      { en: 'She had visited her relatives once in 1993 before she moved.', cn: '搬家前，她在1993年拜访过一次亲戚。', ja: '引っ越す前に1993年に一度親戚を訪ねていました。', explanation: 'Unlike present perfect, past perfect CAN use specific times. "1993" is a specific time — fine with past perfect.' },
+      { en: 'Tony knew Istanbul well because he had visited several times.', cn: '托尼很了解伊斯坦布尔，因为他去过好几次。', ja: 'トニーはイスタンブールをよく知っていた、何度も訪れたことがあったからです。', explanation: 'Past perfect explains the REASON for a past state. The visits happened before Tony knew the city well.' },
+    ],
     mistakes: [
       { wrong: 'I already ate before you came.', correct: 'I had already eaten before you came.' },
       { wrong: 'She has left when I arrived.', correct: 'She had left when I arrived.' },
@@ -239,6 +293,8 @@ const lessons: Lesson[] = [
       { question: 'They ____ never seen a lion before that day.', options: ['has', 'have', 'had', 'were'], answer: 2 },
       { question: 'I ____ not finished my work when she called.', options: ['has', 'have', 'had', 'was'], answer: 2 },
       { question: 'The train ____ already departed when we reached the station.', options: ['has', 'have', 'had', 'was'], answer: 2 },
+      { question: 'She ____ never ____ a bear before she moved to Alaska.', options: ['has / seen', 'had / seen', 'was / seeing', 'did / see'], answer: 1 },
+      { question: 'He was tired because he ____ all day.', options: ['worked', 'had worked', 'has worked', 'works'], answer: 1 },
     ],
   },
   {
@@ -260,6 +316,11 @@ const lessons: Lesson[] = [
       { en: 'They will have arrived by 6 PM.', cn: '他们将在下午6点前到达。', ja: '午後6時までに彼らは到着しているでしょう。' },
       { en: 'By 2030, we will have found a solution.', cn: '到2030年，我们将找到解决方案。', ja: '2030年までに解決策を見つけているでしょう。' },
     ],
+    trickyExamples: [
+      { en: 'I will have been in London for six months by the time I leave.', cn: '到我离开的时候，我将在伦敦待了六个月。', ja: '出発するまでにロンドンに6ヶ月滞在していることになります。', explanation: 'Future perfect with stative verb "be" for duration. Non-continuous verbs use future perfect (not future perfect continuous) for duration up to a future point.' },
+      { en: 'I am going to see a movie when I have finished my homework.', cn: '我完成作业后要去看电影。', ja: '宿題を終えたら映画を見に行くつもりです。', explanation: 'Time clause uses PRESENT PERFECT for future completion — NOT "when I will have finished". Future perfect is forbidden in time clauses.' },
+      { en: 'By the time he gets home, she will have cleaned the entire house.', cn: '到他回家的时候，她将已经打扫完整个房子。', ja: '彼が家に着くまでに彼女は家中を掃除し終えているでしょう。', explanation: 'Action (cleaning) completes BEFORE the reference point (him getting home). "Gets" is present simple in the time clause for future reference.' },
+    ],
     mistakes: [
       { wrong: 'I will finished by tomorrow.', correct: 'I will have finished by tomorrow.' },
       { wrong: 'She will has left by then.', correct: 'She will have left by then.' },
@@ -269,6 +330,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ not have finished by Monday.', options: ['will', 'is', 'has', 'was'], answer: 0 },
       { question: 'By 5 PM, they ____ completed the project.', options: ['will have', 'have', 'had', 'are'], answer: 0 },
       { question: '____ he have arrived by the time we leave?', options: ['Will', 'Is', 'Has', 'Does'], answer: 0 },
+      { question: 'I will go out when I ____ my work.', options: ['will have finished', 'have finished', 'finished', 'will finish'], answer: 1 },
+      { question: 'By December, she ____ here for five years.', options: ['will have worked', 'works', 'worked', 'has worked'], answer: 0 },
     ],
   },
   {
@@ -290,6 +353,11 @@ const lessons: Lesson[] = [
       { en: 'They have been working here since 2019.', cn: '他们从2019年起就在这里工作。', ja: '彼らは2019年からここで働いています。' },
       { en: 'It has been raining all day.', cn: '下了一整天的雨。', ja: '一日中雨が降っています。' },
     ],
+    trickyExamples: [
+      { en: 'Have you been smoking?', cn: '你是不是在抽烟？', ja: 'タバコを吸っていましたか？', explanation: 'Present perfect continuous in a question IMPLIES visible evidence. The speaker smells smoke. Can be insulting if misused — use carefully.' },
+      { en: 'Recently, I have been feeling really tired.', cn: '最近我一直觉得很累。', ja: '最近ずっと疲れを感じています。', explanation: 'Without a duration phrase like "for two weeks", present perfect continuous means "lately/recently" — an ongoing trend.' },
+      { en: 'Sam has had his car for two years.', cn: '山姆拥有他的车两年了。', ja: 'サムは車を2年間持っています。', explanation: 'Stative verb "have" CANNOT use continuous form. "Sam has been having his car" is WRONG. Use present perfect for stative duration.' },
+    ],
     mistakes: [
       { wrong: 'I have study for 3 hours.', correct: 'I have been studying for 3 hours.' },
       { wrong: 'She has waited since morning.', correct: 'She has been waiting since morning.' },
@@ -299,6 +367,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ waiting for you since 2 PM.', options: ['have been', 'has been', 'is', 'was'], answer: 1 },
       { question: 'They ____ not been feeling well lately.', options: ['have', 'has', 'are', 'were'], answer: 0 },
       { question: 'How long ____ you been living here?', options: ['have', 'has', 'are', 'do'], answer: 0 },
+      { question: 'She ____ her job for 10 years now.', options: ['has been having', 'has had', 'is having', 'had'], answer: 1 },
+      { question: 'Your eyes are red. ____ you ____?', options: ['Did / cry', 'Have / been crying', 'Are / crying', 'Were / cry'], answer: 1 },
     ],
   },
   {
@@ -320,6 +390,11 @@ const lessons: Lesson[] = [
       { en: 'They were tired because they had been running.', cn: '他们很累，因为他们一直在跑步。', ja: '走っていたので彼らは疲れていました。' },
       { en: 'He had been waiting for an hour before the bus came.', cn: '公交车来之前他已经等了一个小时。', ja: 'バスが来る前に1時間待っていました。' },
     ],
+    trickyExamples: [
+      { en: 'Jason was tired because he had been jogging.', cn: '杰森很累，因为他一直在慢跑。', ja: 'ジェイソンはジョギングをしていたので疲れていました。', explanation: 'Past perfect continuous shows CAUSE of a past state. The jogging happened over a period and caused the tiredness.' },
+      { en: 'He was tired because he was exercising so hard.', cn: '他很累，因为他当时正在拼命锻炼。', ja: '一生懸命運動していたので疲れていました。', explanation: 'Past continuous emphasizes exercising AT that exact moment. Past perfect continuous "had been exercising" emphasizes the duration leading up to the tiredness.' },
+      { en: 'They had been talking for over an hour before Tony arrived.', cn: '托尼到达之前，他们已经聊了一个多小时。', ja: 'トニーが到着する前に1時間以上話し続けていました。', explanation: 'Duration of an action before another past point. The talking started first, continued, and stopped when Tony arrived.' },
+    ],
     mistakes: [
       { wrong: 'I had study for 2 hours.', correct: 'I had been studying for 2 hours.' },
       { wrong: 'She had work there for years.', correct: 'She had been working there for years.' },
@@ -329,6 +404,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ been waiting long before the bus arrived.', options: ['has', 'have', 'had', 'was'], answer: 2 },
       { question: 'They were tired because they ____ been working all day.', options: ['has', 'have', 'had', 'were'], answer: 2 },
       { question: '____ he been living there long before he moved?', options: ['Has', 'Have', 'Had', 'Was'], answer: 2 },
+      { question: 'Her eyes were red. She ____.', options: ['has been crying', 'had been crying', 'was crying', 'cried'], answer: 1 },
+      { question: 'The ground was wet. It ____ for hours.', options: ['has been raining', 'had been raining', 'was raining', 'rained'], answer: 1 },
     ],
   },
   {
@@ -350,6 +427,11 @@ const lessons: Lesson[] = [
       { en: 'By midnight, we will have been traveling for 12 hours.', cn: '到午夜，我们将已经旅行12个小时了。', ja: '真夜中までに12時間旅行していることになります。' },
       { en: 'He will have been living in London for a year by June.', cn: '到6月，他将在伦敦住满一年。', ja: '6月までに彼はロンドンに1年間住んでいることになります。' },
     ],
+    trickyExamples: [
+      { en: 'Jason will be tired because he will have been jogging for over an hour.', cn: '杰森会很累，因为他将已经慢跑了一个多小时。', ja: 'ジェイソンは1時間以上ジョギングをしているので疲れているでしょう。', explanation: 'Future perfect continuous shows CAUSE of a future state. The jogging duration causes the expected tiredness.' },
+      { en: 'You won\'t get a promotion until you have been working here as long as Tim.', cn: '你要在这里工作到和蒂姆一样长的时间才能升职。', ja: 'ティムと同じくらい長くここで働くまで昇進はありません。', explanation: 'Time clause uses PRESENT PERFECT CONTINUOUS for future duration — NOT "until you will have been working". Future forms are forbidden in time clauses.' },
+      { en: 'James will have been teaching for more than a year by the time he leaves for Asia.', cn: '到詹姆斯去亚洲的时候，他将已经教了一年多。', ja: 'アジアへ発つ頃にはジェームズは1年以上教えていることになります。', explanation: 'Duration of an action before a future reference point. The teaching starts earlier and continues until (or through) the departure.' },
+    ],
     mistakes: [
       { wrong: 'I will have study for 5 years.', correct: 'I will have been studying for 5 years.' },
       { wrong: 'She will been working here.', correct: 'She will have been working here.' },
@@ -359,6 +441,8 @@ const lessons: Lesson[] = [
       { question: 'She ____ not have been working here long by then.', options: ['will', 'is', 'has', 'was'], answer: 0 },
       { question: 'By midnight, they ____ been traveling for 8 hours.', options: ['will have', 'have', 'had', 'are'], answer: 0 },
       { question: 'By December, we ____ been living here for 3 years.', options: ['will have', 'have', 'had', 'are'], answer: 0 },
+      { question: 'By the time you arrive, I ____ for three hours.', options: ['will have been waiting', 'have waited', 'had waited', 'wait'], answer: 0 },
+      { question: 'I will be exhausted because I ____ working all night.', options: ['have been', 'will have been', 'had been', 'am'], answer: 1 },
     ],
   },
 ]

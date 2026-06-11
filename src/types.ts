@@ -6,6 +6,13 @@ export interface Example {
   ja: string
 }
 
+export interface TrickyExample {
+  en: string
+  cn: string
+  ja: string
+  explanation: string
+}
+
 export interface Mistake {
   wrong: string
   correct: string
@@ -51,6 +58,7 @@ export interface Lesson {
   timelineType: TimelineType
   formula: Formula
   examples: Example[]
+  trickyExamples: TrickyExample[]
   mistakes: Mistake[]
   quiz: QuizQuestion[]
 }

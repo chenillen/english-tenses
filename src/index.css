@@ -4,12 +4,49 @@
 
 @theme {
   --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-heading: 'Geist', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, monospace;
 
-  --color-present: #3b82f6;
-  --color-past: #f97316;
-  --color-future: #a855f7;
-  --color-continuous: #22c55e;
-  --color-perfect: #ef4444;
+  --color-canvas: #F7F6F3;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #F9F9F8;
+  --color-surface-hover: #F3F2F0;
+  --color-border: #EAEAEA;
+  --color-border-hover: #D9D9D9;
+  --color-text-primary: #111111;
+  --color-text-secondary: #787774;
+  --color-text-tertiary: #9B9A97;
+  --color-text-muted: #B4B3AF;
+  --color-progress-bg: #E8E7E4;
+
+  --color-present: #5BA4CF;
+  --color-present-bg: #E1F3FE;
+  --color-present-text: #1F6C9F;
+
+  --color-past: #C8844A;
+  --color-past-bg: #FEF3E8;
+  --color-past-text: #9F5B2D;
+
+  --color-future: #8B5FBF;
+  --color-future-bg: #F3EDFC;
+  --color-future-text: #6B3F9F;
+
+  --color-continuous: #5C8F5A;
+  --color-continuous-bg: #EDF3EC;
+  --color-continuous-text: #346538;
+
+  --color-perfect: #C45552;
+  --color-perfect-bg: #FDEBEC;
+  --color-perfect-text: #9F2F2D;
+
+  --color-level-1: #EDF3EC;
+  --color-level-1-text: #346538;
+  --color-level-2: #FBF3DB;
+  --color-level-2-text: #956400;
+  --color-level-3: #FEF3E8;
+  --color-level-3-text: #9F5B2D;
+  --color-level-4: #F3EDFC;
+  --color-level-4-text: #6B3F9F;
 }
 
 * {
@@ -22,10 +59,10 @@ html {
 }
 
 body {
-  @apply bg-white text-zinc-900 dark:bg-zinc-950 dark:text-zinc-100;
+  @apply bg-canvas text-text-primary dark:bg-[#0D0D0D] dark:text-[#EDEDED];
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 :focus-visible {
-  @apply outline-2 outline-offset-2 outline-blue-500;
+  @apply outline-2 outline-offset-2 outline-present;
 }

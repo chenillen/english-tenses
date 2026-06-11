@@ -24,7 +24,7 @@ export default function Home() {
         <motion.h1
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mb-2 text-3xl font-extrabold tracking-tight text-zinc-900 dark:text-white sm:text-4xl"
+          className="mb-2 font-heading text-3xl font-extrabold tracking-tight text-text-primary dark:text-[#EDEDED] sm:text-4xl"
         >
           {t('app.title')}
         </motion.h1>
@@ -32,7 +32,7 @@ export default function Home() {
           initial={{ opacity: 0, y: -4 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.05 }}
-          className="text-zinc-500 dark:text-zinc-400"
+          className="text-sm leading-relaxed text-text-secondary dark:text-[#9B9B9B]"
         >
           {t('app.subtitle')}
         </motion.p>
@@ -41,19 +41,19 @@ export default function Home() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
-          className="mt-6 rounded-3xl border border-zinc-200 bg-zinc-50 p-5 dark:border-zinc-800 dark:bg-zinc-900 sm:p-6"
+          className="mt-6 rounded-xl border border-border bg-surface-raised p-5 dark:border-[#2A2A2A] dark:bg-[#242424] sm:p-6"
         >
           <div className="flex items-end justify-between mb-3">
             <div>
-              <span className="text-2xl font-extrabold tabular-nums text-zinc-900 dark:text-white">
+              <span className="text-2xl font-extrabold tabular-nums text-text-primary dark:text-[#EDEDED]">
                 {getOverallProgress()}
               </span>
-              <span className="text-sm text-zinc-400"> / 12</span>
-              <span className="ml-2 text-sm font-medium text-zinc-500 dark:text-zinc-400">
+              <span className="text-sm text-text-muted dark:text-[#777777]"> / 12</span>
+              <span className="ml-2 text-sm font-medium text-text-tertiary dark:text-[#777777]">
                 {t('home.lessonsCompleted')}
               </span>
             </div>
-            <span className="text-sm font-semibold tabular-nums text-zinc-500 dark:text-zinc-400">
+            <span className="text-sm font-semibold tabular-nums text-text-tertiary dark:text-[#777777]">
               {Math.round((getOverallProgress() / 12) * 100)}%
             </span>
           </div>
@@ -70,13 +70,13 @@ export default function Home() {
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.15 + lvlIndex * 0.05 }}
+              transition={{ duration: 0.5, delay: 0.15 + lvlIndex * 0.05, ease: [0.16, 1, 0.3, 1] }}
               className="mb-4"
             >
-              <h2 className="text-lg font-bold text-zinc-900 dark:text-white">
+              <h2 className="text-lg font-bold text-text-primary dark:text-[#EDEDED]">
                 {t(`home.levelLabels.${level}`)}
               </h2>
-              <p className="text-sm text-zinc-400">{t(`home.levelDescs.${level}`)}</p>
+              <p className="text-sm text-text-muted dark:text-[#777777]">{t(`home.levelDescs.${level}`)}</p>
             </motion.div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
@@ -84,7 +84,7 @@ export default function Home() {
                 <Link
                   key={lesson.id}
                   to={`/lesson/${lesson.slug}`}
-                  className="block focus:outline-none"
+                  className="block h-full focus:outline-none"
                 >
                   <LessonCard
                     lesson={lesson}

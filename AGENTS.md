@@ -1,5 +1,7 @@
 # AGENTS.md
 
+> Design principles and visual guardrails are documented in [DESIGN.md](./DESIGN.md). All UI work must align with the rules defined there before shipping.
+
 ## Architecture
 
 Single-page React app deployed to GitHub Pages. No backend, no database.

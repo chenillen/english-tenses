@@ -66,6 +66,7 @@
       "usage": "Usage",
       "grammarFormula": "Grammar Formula",
       "examples": "Examples",
+      "trickyExamples": "Tricky Examples / Edge Cases",
       "commonMistakes": "Common Mistakes",
       "quiz": "Quiz",
       "positive": "Positive",
