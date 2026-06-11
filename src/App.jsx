@@ -1,25 +1,21 @@
-
-import { motion } from 'framer-motion'
-import lessons from './data/lessons'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Header from './components/Header'
+import PageTransition from './components/PageTransition'
+import Home from './pages/Home'
+import LessonDetail from './pages/LessonDetail'
 
 export default function App() {
   return (
-    <main className="min-h-screen p-6">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold mb-6">English Tenses</h1>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {lessons.map((lesson) => (
-            <motion.div
-              key={lesson.id}
-              whileHover={{ y: -4 }}
-              className="rounded-2xl border p-5 shadow-sm"
-            >
-              <h2 className="text-xl font-semibold">{lesson.name}</h2>
-              <p>{lesson.description}</p>
-            </motion.div>
-          ))}
-        </div>
+    <BrowserRouter basename="/english-tenses">
+      <div className="min-h-screen bg-white dark:bg-zinc-950">
+        <Header />
+        <PageTransition>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/lesson/:slug" element={<LessonDetail />} />
+          </Routes>
+        </PageTransition>
       </div>
-    </main>
+    </BrowserRouter>
   )
 }
