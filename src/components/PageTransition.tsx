@@ -1,5 +1,10 @@
+import { type ReactNode } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useLocation } from 'react-router-dom'
+
+interface PageTransitionProps {
+  children: ReactNode
+}
 
 const variants = {
   initial: { opacity: 0, y: 8 },
@@ -7,7 +12,7 @@ const variants = {
   exit: { opacity: 0, y: -8 },
 }
 
-export default function PageTransition({ children }) {
+export default function PageTransition({ children }: PageTransitionProps) {
   const location = useLocation()
 
   return (
